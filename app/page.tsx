@@ -1,11 +1,56 @@
+"use client";
+
 import Navbar from "./components/Navbar";
 import ProjectCard from "./components/projectCard";
 import Image from "next/image";
 import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { projects } from "@/data-projects/projects";
 import { experience } from "@/data-projects/experiences";
+import { useState } from "react";
 
 export default function Home() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError(null);
+
+    const form = e.currentTarget;
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "75c18e52-bb2d-4a95-a933-f6f395a57ebb",
+          name: (form.elements.namedItem("name") as HTMLInputElement).value,
+          subject: "Consulta desde el portfolio",
+          email: (form.elements.namedItem("email") as HTMLInputElement).value,
+          message: (form.elements.namedItem("message") as HTMLTextAreaElement)
+            .value,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setIsSuccess(true);
+        form.reset();
+      } else {
+        setError(result.message || "Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      setError("An error occurred while submitting the form.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <>
       <Navbar />
@@ -152,19 +197,21 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
               {/* Contact Form - Mobile First */}
               <div className="bg-dark-lighter p-4 sm:p-6 md:p-8 rounded-lg border border-dark-lighter">
-                <form className="space-y-4 sm:space-y-5">
+                <form className="space-y-4 sm:space-y-5" onSubmit={onSubmit}>
                   <div>
                     <label
                       htmlFor="name"
                       className="block text-sm font-medium mb-2"
                     >
-                      Nombre
+                      Nombre*
                     </label>
                     <input
+                      name="name"
                       type="text"
                       id="name"
                       className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark border border-dark-lighter rounded-lg focus:outline-none focus:border-primary text-sm sm:text-base transition-colors"
                       placeholder="Tu nombre"
+                      required
                     />
                   </div>
                   <div>
@@ -172,13 +219,15 @@ export default function Home() {
                       htmlFor="email"
                       className="block text-sm font-medium mb-2"
                     >
-                      Email
+                      Email*
                     </label>
                     <input
+                      name="email"
                       type="email"
                       id="email"
                       className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark border border-dark-lighter rounded-lg focus:outline-none focus:border-primary text-sm sm:text-base transition-colors"
                       placeholder="tu@email.com"
+                      required
                     />
                   </div>
                   <div>
@@ -186,18 +235,21 @@ export default function Home() {
                       htmlFor="message"
                       className="block text-sm font-medium mb-2"
                     >
-                      Mensaje
+                      Mensaje*
                     </label>
                     <textarea
+                      name="message"
                       id="message"
                       rows={4}
                       className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark border border-dark-lighter rounded-lg focus:outline-none focus:border-primary resize-none text-sm sm:text-base transition-colors"
                       placeholder="Cuéntame sobre tu proyecto..."
+                      required
                     ></textarea>
                   </div>
-                  <button type="submit" className="btn-primary w-full">
-                    Enviar Mensaje
+                  <button type="submit" className="btn-primary w-full" disabled={isSubmitting}>
+                    {isSubmitting? "Enviando..." : "Enviar Mensaje"}
                   </button>
+                  <p className="text-sm text-gray-300 mt-2">{isSuccess ? "¡Mensaje enviado correctamente!" : error}</p>
                 </form>
               </div>
 
