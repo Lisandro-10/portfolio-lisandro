@@ -20,7 +20,7 @@ export default function Home() {
                   Lisandro Andia
                 </h1>
                 <h2 className="text-xl sm:text-2xl md:text-3xl text-primary mb-4 sm:mb-6">
-                  Desarrollador Full Stack | Arquitecto de Software
+                  Ingeniero en Sistemas | Desarrollador Full Stack
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mb-6 sm:mb-8 mx-auto md:mx-0">
                   Especializado en crear experiencias web modernas y escalables.

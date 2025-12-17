@@ -10,13 +10,17 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
+  // Prevenir scroll cuando el menú móvil está abierto
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isOpen]);
 
   const navItems = [
     { name: "Proyectos", href: "#proyectos" },
@@ -43,7 +47,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-6 lg:space-x-8">
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navItems.map((item) => (
               <a
                 key={item.name}
@@ -53,31 +57,43 @@ export default function Navbar() {
                 {item.name}
               </a>
             ))}
+            
+            {/* Theme Toggle Button - Desktop */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-white hover:text-primary transition-colors rounded-lg hover:bg-dark-lighter"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
           </div>
 
-          {/* Theme Toggle Button */}
-          <button
-            onClick={toggleTheme}
-            className="p-2 text-white hover:text-primary transition-colors rounded-lg hover:bg-dark-lighter"
-            aria-label="Toggle theme"
-          >
-            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
+          {/* Mobile Controls */}
+          <div className="md:hidden flex items-center gap-2">
+            {/* Theme Toggle Button - Mobile */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-white hover:text-primary transition-colors rounded-lg hover:bg-dark-lighter"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white p-1 hover:text-primary transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-white p-1 hover:text-primary transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Menu - Full screen overlay */}
+      {/* Mobile Menu - Full screen overlay con backdrop blur mejorado */}
       {isOpen && (
-        <div className="md:hidden fixed inset-0 top-14 sm:top-16 bg-dark/98 backdrop-blur-md z-40 animate-fadeIn">
+        <div className="md:hidden fixed inset-0 top-14 sm:top-16 bg-dark/98 backdrop-blur-xl z-40 animate-fadeIn">
           <div className="px-4 pt-4 pb-6 space-y-1">
             {navItems.map((item) => (
               <a

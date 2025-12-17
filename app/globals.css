@@ -91,9 +91,9 @@
 html.light {
   --color-bg: #ffffff;
   --color-bg-secondary: #f1f5f9;
-  --color-text: #0f172a;
-  --color-text-secondary: #475569;
-  --color-border: #e2e8f0;
+  --color-text: #0F172A;
+  --color-text-secondary: #334155;
+  --color-border: #334155;
 }
 
 html.light {
@@ -107,6 +107,11 @@ html.light .bg-dark {
 
 html.light .bg-dark-lighter {
   background-color: var(--color-bg-secondary);
+}
+
+/* Sección de proyectos más clara */
+html.light .bg-dark-lighter\/50 {
+  background-color: #f8fafc;
 }
 
 html.light .text-white {
@@ -125,8 +130,79 @@ html.light .border-dark-lighter {
 html.light .project-card {
   background-color: var(--color-bg);
   border-color: var(--color-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 html.light .project-card:hover {
-  border-color: #6366f1;
+  border-color: #3B82F6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+/* Navbar en Light Theme */
+html.light nav {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+html.light nav.scrolled {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  border-bottom: 1px solid #334155;
+}
+
+html.light nav a:not(.logo),
+html.light nav button:not(.theme-toggle) {
+  color: #334155;
+}
+
+html.light nav a:not(.logo):hover {
+  color: #3B82F6;
+}
+
+html.light nav .logo {
+  color: #3B82F6 !important;
+}
+
+/* Theme toggle button en light */
+html.light .theme-toggle {
+  color: #334155;
+}
+
+html.light .theme-toggle:hover {
+  color: #3B82F6;
+  background-color: #f1f5f9;
+}
+
+/* Mobile Menu en Light Theme */
+html.light .mobile-menu-bg {
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+html.light .mobile-menu-bg a {
+  color: #334155;
+}
+
+html.light .mobile-menu-bg a:hover {
+  color: #3B82F6;
+  background-color: #f1f5f9;
+}
+
+/* Mobile Menu en Dark Theme */
+.mobile-menu-bg {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Input fields en light theme */
+html.light input,
+html.light textarea {
+  background-color: #ffffff;
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+html.light input:focus,
+html.light textarea:focus {
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
