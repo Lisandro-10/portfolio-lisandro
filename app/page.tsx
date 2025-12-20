@@ -1,12 +1,13 @@
 "use client";
 
 import Navbar from "./components/Navbar";
-import ProjectCard from "./components/projectCard";
+import ProjectCard from "./components/ProjectCard";
 import Image from "next/image";
 import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { projects } from "@/data-projects/projects";
 import { experience } from "@/data-projects/experiences";
 import { useState } from "react";
+import { Footer } from "./components/Footer";
 
 export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -310,13 +311,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* Footer - Mobile First */}
-        <footer className="bg-dark-lighter py-6 sm:py-8 text-center border-t border-dark-lighter">
-          <p className="text-xs sm:text-sm text-gray-400">
-            © 2025 Lisandro Andia. Todos los derechos reservados.
-          </p>
-        </footer>
+        <Footer />
       </main>
     </>
   );

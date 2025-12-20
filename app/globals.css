@@ -143,6 +143,10 @@ html.light nav {
   background-color: rgba(255, 255, 255, 0.95) !important;
 }
 
+html.light nav.bg-dark-darker {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+}
+
 html.light nav.scrolled {
   background-color: rgba(255, 255, 255, 0.98) !important;
   border-bottom: 1px solid #334155;
@@ -172,25 +176,17 @@ html.light .theme-toggle:hover {
 }
 
 /* Mobile Menu en Light Theme */
-html.light .mobile-menu-bg {
-  background-color: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+html.light .bg-dark-darker\/75 {
+  background-color: rgba(255, 255, 255, 0.95);
 }
 
-html.light .mobile-menu-bg a {
+html.light .bg-dark-darker\/75 a {
   color: #334155;
 }
 
-html.light .mobile-menu-bg a:hover {
+html.light .bg-dark-darker\/75 a:hover {
   color: #3B82F6;
-  background-color: #f1f5f9;
-}
-
-/* Mobile Menu en Dark Theme */
-.mobile-menu-bg {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(241, 245, 249, 0.5);
 }
 
 /* Input fields en light theme */
