@@ -1,7 +1,7 @@
 export const servicePlans = [
   {
     title: "Landing Esencial",
-    price: "$150",
+    price: "$199",
     description: "Presencia web rápida y efectiva",
     features: [
       "Landing page de 1-3 secciones",
@@ -14,7 +14,7 @@ export const servicePlans = [
   },
   {
     title: "Web Profesional",
-    price: "$300",
+    price: "$299",
     description: "Solución completa y escalable",
     features: [
       "SPA completa desarrollada con Next.js",
@@ -31,7 +31,7 @@ export const servicePlans = [
   },
   {
     title: "Solución E-commerce",
-    price: "$900",
+    price: "$999",
     description: "Vende online desde el día uno",
     features: [
       "Todo lo del Plan Profesional",

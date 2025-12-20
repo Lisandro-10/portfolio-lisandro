@@ -1,18 +1,15 @@
 "use client";
 
-import Navbar from "../components/Navbar";
 import PricingCard from "../components/PricingCard";
 import { servicePlans, faqItems } from "@/data-projects/servicios";
 import { Mail, Phone, ChevronDown } from "lucide-react";
 import { useState } from "react";
-import { Footer } from "../components/Footer";
 
 export default function Servicios() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
     <>
-      <Navbar />
       <main className="pt-14 sm:pt-16">
         {/* Hero Section */}
         <section className="section-container text-center">
@@ -114,7 +111,6 @@ export default function Servicios() {
             </a>
           </div>
         </section>
-        <Footer />
       </main>
     </>
   );

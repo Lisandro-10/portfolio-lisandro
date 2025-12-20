@@ -44,12 +44,12 @@ export default function PricingCard({
             {title}
           </h3>
           <p className="text-xs sm:text-sm text-gray-400 mb-4">{description}</p>
-          <div className="mb-4 sm:mb-6">
+          {/* <div className="mb-4 sm:mb-6">
             <span className="text-3xl sm:text-4xl font-bold text-primary">
               {price}
             </span>
             <span className="text-sm text-gray-400 ml-1">USD</span>
-          </div>
+          </div> */}
         </div>
 
         {/* Features List */}

@@ -1,13 +1,11 @@
 "use client";
 
-import Navbar from "./components/Navbar";
 import ProjectCard from "./components/ProjectCard";
 import Image from "next/image";
 import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { projects } from "@/data-projects/projects";
 import { experience } from "@/data-projects/experiences";
 import { useState } from "react";
-import { Footer } from "./components/Footer";
 
 export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -54,7 +52,6 @@ export default function Home() {
   };
   return (
     <>
-      <Navbar />
       <main className="pt-14 sm:pt-16">
         {/* Hero Section - Mobile First */}
         <section className="min-h-[calc(100vh-3.5rem)] sm:min-h-[calc(100vh-4rem)] flex items-center section-container">
@@ -311,7 +308,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <Footer />
       </main>
     </>
   );
