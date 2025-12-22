@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import {Inter} from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar";
-import {Footer} from "./components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -10,7 +8,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Lisandro Andia | Ingeniero en Sistemas",
-  description: "Portfolio profesional de Lisandro Andia - Ingeniero en Sistemas, especializado en desarrollo de aplicaciones web Next.js y spring boot",
+  description: "Portfolio profesional de Lisandro Andia",
 };
 
 export default function RootLayout({
@@ -19,13 +17,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.className} bg-dark text-white antialiased`}
-      >
-        <Navbar />
+    <html>
+      <body className={`${inter.className} bg-dark text-white antialiased`}>
         {children}
-        <Footer />
       </body>
     </html>
   );
