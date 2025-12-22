@@ -1,16 +1,25 @@
-# Plan de Desarrollo: E-commerce con Next.js + Tiendanube
+# Plan de Desarrollo: E-commerce con Next.js + Tiendanube (Actualizado)
+
+## 🆕 Cambios Principales
+
+1. **Multilenguaje**: Implementación con `next-intl` (ES/EN)
+2. **Routing actualizado**: Estructura con `app/[locale]/`
+3. **Dependencias actualizadas**: Next.js 14.2.35, next-intl 3.22.0
+4. **TypeScript estricto**: Configuración mejorada
+
+---
 
 ## Visión General
 
-Frontend custom en Next.js que consume la API de Tiendanube. El cliente administra productos, stock y órdenes desde Tiendanube. Vos entregás la experiencia de usuario.
+Frontend custom en Next.js con soporte multilenguaje que consume la API de Tiendanube.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                  FRONTEND (Next.js 14)                      │
+│              FRONTEND (Next.js 14 + i18n)                   │
 │                                                             │
 │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         │
-│  │   Páginas   │  │  Componentes│  │   Estado    │         │
-│  │  (SSR/SSG)  │  │    (React)  │  │  (Zustand)  │         │
+│  │[locale]/    │  │  next-intl  │  │   Estado    │         │
+│  │ Páginas     │  │Traducciones │  │  (Zustand)  │         │
 │  └─────────────┘  └─────────────┘  └─────────────┘         │
 │                          │                                  │
 │                    ┌─────▼─────┐                            │
@@ -27,63 +36,75 @@ Frontend custom en Next.js que consume la API de Tiendanube. El cliente administ
 
 ---
 
-## Stack Tecnológico
+## Stack Tecnológico Actualizado
 
 | Componente | Versión | Uso |
 |------------|---------|-----|
-| Next.js | 14.2.x | Framework principal, API Routes |
-| React | 18.3.x | UI Components |
+| Next.js | 14.2.35 | Framework principal, API Routes |
+| React | 18.x | UI Components |
 | TypeScript | 5.x | Tipado estricto |
-| Tailwind CSS | 3.4.x | Estilos |
+| Tailwind CSS | 3.4.1 | Estilos mobile-first |
 | Zustand | 4.5.x | Estado global (carrito) |
-| React Query | 5.x | Cache y fetching |
+| next-intl | 3.22.0 | Internacionalización |
+| lucide-react | 0.561.0 | Iconos |
 
 ---
 
-## Estructura del Proyecto
+## Estructura del Proyecto Actualizada
 
 ```
 src/
 ├── app/
-│   ├── layout.tsx
-│   ├── page.tsx                    # Home
-│   ├── productos/
-│   │   ├── page.tsx                # Listado
-│   │   └── [slug]/
-│   │       └── page.tsx            # Detalle producto
-│   ├── categorias/
-│   │   └── [slug]/
+│   ├── [locale]/
+│   │   ├── layout.tsx             # Layout con i18n
+│   │   ├── page.tsx                # Home multilenguaje
+│   │   ├── productos/
+│   │   │   ├── page.tsx            # Listado
+│   │   │   └── [slug]/
+│   │   │       └── page.tsx        # Detalle producto
+│   │   ├── categorias/
+│   │   │   └── [slug]/
+│   │   │       └── page.tsx
+│   │   ├── carrito/
+│   │   │   └── page.tsx
+│   │   └── checkout/
 │   │       └── page.tsx
-│   ├── carrito/
-│   │   └── page.tsx
-│   ├── checkout/
-│   │   └── page.tsx
-│   └── api/                        # API Routes (proxy a Tiendanube)
-│       └── tiendanube/
-│           ├── products/
-│           │   └── route.ts        # GET productos
-│           ├── products/[id]/
-│           │   └── route.ts        # GET producto individual
-│           ├── categories/
-│           │   └── route.ts
-│           ├── cart/
-│           │   └── route.ts        # POST crear carrito
-│           └── checkout/
-│               └── route.ts        # POST iniciar checkout
-├── components/
-│   ├── ui/                         # Botones, inputs, etc.
-│   ├── product/
-│   │   ├── ProductCard.tsx
-│   │   ├── ProductGrid.tsx
-│   │   └── ProductGallery.tsx
-│   ├── cart/
-│   │   ├── CartDrawer.tsx
-│   │   ├── CartItem.tsx
-│   │   └── CartSummary.tsx
-│   └── layout/
-│       ├── Header.tsx
-│       ├── Footer.tsx
-│       └── MobileNav.tsx
+│   ├── api/                        # API Routes (proxy a Tiendanube)
+│   │   └── tiendanube/
+│   │       ├── products/
+│   │       │   └── route.ts        # GET productos
+│   │       ├── products/[id]/
+│   │       │   └── route.ts        # GET producto individual
+│   │       ├── categories/
+│   │       │   └── route.ts
+│   │       ├── cart/
+│   │       │   └── route.ts        # POST crear carrito
+│   │       └── checkout/
+│   │           └── route.ts        # POST iniciar checkout
+│   ├── components/
+│   │   ├── ui/                     # Botones, inputs, etc.
+│   │   ├── product/
+│   │   │   ├── ProductCard.tsx
+│   │   │   ├── ProductGrid.tsx
+│   │   │   └── ProductGallery.tsx
+│   │   ├── cart/
+│   │   │   ├── CartDrawer.tsx
+│   │   │   ├── CartItem.tsx
+│   │   │   └── CartSummary.tsx
+│   │   ├── layout/
+│   │   │   ├── Navbar.tsx          # Ya existe con i18n
+│   │   │   └── Footer.tsx          # Ya existe con i18n
+│   │   └── LanguageSwitcher.tsx    # Cambio de idioma
+│   ├── hooks/
+│   │   └── useTheme.tsx            # Ya existe
+│   ├── globals.css                 # Ya configurado
+│   └── layout.tsx                  # Root layout
+├── i18n/
+│   ├── routing.ts                  # Configuración de rutas
+│   └── navigation.ts               # Link, useRouter, usePathname
+├── messages/
+│   ├── es.json                     # Traducciones español
+│   └── en.json                     # Traducciones inglés
 ├── lib/
 │   ├── tiendanube/
 │   │   ├── client.ts               # Cliente HTTP configurado
@@ -112,7 +133,32 @@ TIENDANUBE_API_URL=https://api.tiendanube.com/v1
 NEXT_PUBLIC_SITE_URL=https://tu-dominio.com
 ```
 
-### 1.2 Cliente HTTP para Tiendanube
+### 1.2 Configuración de i18n (Ya implementado)
+
+Tu proyecto ya tiene configurado next-intl. Solo necesitás agregar las traducciones del e-commerce:
+
+```typescript
+// messages/es.json (agregar sección de e-commerce)
+{
+  "Ecommerce": {
+    "products": "Productos",
+    "categories": "Categorías",
+    "cart": "Carrito",
+    "addToCart": "Agregar al carrito",
+    "outOfStock": "Sin stock",
+    "price": "Precio",
+    "compareAt": "Antes",
+    "freeShipping": "Envío gratis",
+    "quantity": "Cantidad",
+    "total": "Total",
+    "checkout": "Finalizar compra",
+    "emptyCart": "Tu carrito está vacío",
+    "continueShopping": "Seguir comprando"
+  }
+}
+```
+
+### 1.3 Cliente HTTP para Tiendanube
 
 ```typescript
 // src/lib/tiendanube/client.ts
@@ -153,7 +199,7 @@ export async function tiendanubeApi<T>(
 }
 ```
 
-### 1.3 Tipos Base
+### 1.4 Tipos Base
 
 ```typescript
 // src/lib/tiendanube/types.ts
@@ -174,12 +220,13 @@ export interface TiendanubeProduct {
 export interface LocalizedField {
   es: string;
   en?: string;
+  pt?: string;
 }
 
 export interface ProductVariant {
   id: number;
   price: string;
-  compare_at_price: string | null;  // precio tachado
+  compare_at_price: string | null;
   stock: number | null;
   sku: string | null;
   values: VariantValue[];
@@ -197,6 +244,11 @@ export interface Category {
   name: LocalizedField;
   handle: LocalizedField;
   parent?: number | null;
+}
+
+export interface VariantValue {
+  en: string;
+  es: string;
 }
 ```
 
@@ -240,67 +292,212 @@ export async function GET(request: NextRequest) {
 }
 ```
 
-### 2.2 Página de Productos (Server Component)
+### 2.2 Página de Productos con i18n
 
 ```typescript
-// src/app/productos/page.tsx
+// src/app/[locale]/productos/page.tsx
 import { tiendanubeApi } from '@/lib/tiendanube/client';
 import { TiendanubeProduct } from '@/lib/tiendanube/types';
-import ProductGrid from '@/components/product/ProductGrid';
+import ProductGrid from '@/app/components/product/ProductGrid';
+import { useTranslations } from 'next-intl';
+import { setRequestLocale } from 'next-intl/server';
 
 interface Props {
-  searchParams: { page?: string; categoria?: string };
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ page?: string; categoria?: string }>;
 }
 
-export default async function ProductosPage({ searchParams }: Props) {
-  const page = searchParams.page || '1';
+export default async function ProductosPage({ params, searchParams }: Props) {
+  const { locale } = await params;
+  const { page = '1' } = await searchParams;
   
+  setRequestLocale(locale);
+
   const products = await tiendanubeApi<TiendanubeProduct[]>(
     `/products?page=${page}&per_page=12&published=true`,
     { cache: 'force-cache', tags: ['products'] }
   );
 
   return (
-    <main className="section-container">
-      <h1 className="text-2xl sm:text-3xl font-bold mb-6">
-        Nuestros Productos
-      </h1>
-      <ProductGrid products={products} />
+    <main className="pt-14 sm:pt-16">
+      <section className="section-container">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-center">
+          {/* Traducción desde messages/{locale}.json */}
+        </h1>
+        <ProductGrid products={products} locale={locale} />
+      </section>
     </main>
   );
 }
 ```
 
-### 2.3 Página de Detalle de Producto
+### 2.3 Componente ProductGrid
 
 ```typescript
-// src/app/productos/[slug]/page.tsx
+// src/app/components/product/ProductGrid.tsx
+'use client';
+
+import { TiendanubeProduct } from '@/lib/tiendanube/types';
+import ProductCard from './ProductCard';
+
+interface Props {
+  products: TiendanubeProduct[];
+  locale: string;
+}
+
+export default function ProductGrid({ products, locale }: Props) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+      {products.map((product) => (
+        <ProductCard key={product.id} product={product} locale={locale} />
+      ))}
+    </div>
+  );
+}
+```
+
+### 2.4 Componente ProductCard (Mobile-First)
+
+```typescript
+// src/app/components/product/ProductCard.tsx
+'use client';
+
+import Image from 'next/image';
+import { Link } from '@/i18n/navigation';
+import { TiendanubeProduct } from '@/lib/tiendanube/types';
+import { useTranslations } from 'next-intl';
+
+interface Props {
+  product: TiendanubeProduct;
+  locale: string;
+}
+
+export default function ProductCard({ product, locale }: Props) {
+  const t = useTranslations('Ecommerce');
+  
+  const mainVariant = product.variants[0];
+  const price = parseFloat(mainVariant.price);
+  const comparePrice = mainVariant.compare_at_price 
+    ? parseFloat(mainVariant.compare_at_price) 
+    : null;
+
+  // Nombre y handle según el idioma
+  const name = product.name[locale as 'es' | 'en'] || product.name.es;
+  const slug = product.handle[locale as 'es' | 'en'] || product.handle.es;
+
+  return (
+    <Link href={`/productos/${slug}`} className="project-card group">
+      {/* Imagen */}
+      <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden bg-dark-lighter">
+        {product.images[0] && (
+          <Image
+            src={product.images[0].src}
+            alt={name}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        )}
+        {product.free_shipping && (
+          <div className="absolute top-2 right-2 bg-primary text-dark text-xs px-2 py-1 rounded-full">
+            {t('freeShipping')}
+          </div>
+        )}
+      </div>
+
+      {/* Contenido */}
+      <div className="p-4 sm:p-5">
+        <h3 className="text-base sm:text-lg font-bold mb-2 text-white group-hover:text-primary transition-colors line-clamp-2">
+          {name}
+        </h3>
+
+        <div className="flex items-baseline gap-2 mb-3">
+          <span className="text-lg sm:text-xl font-bold text-primary">
+            ${price.toLocaleString('es-AR')}
+          </span>
+          {comparePrice && (
+            <span className="text-sm text-gray-400 line-through">
+              ${comparePrice.toLocaleString('es-AR')}
+            </span>
+          )}
+        </div>
+
+        {mainVariant.stock !== null && mainVariant.stock <= 0 && (
+          <p className="text-xs text-gray-400">{t('outOfStock')}</p>
+        )}
+      </div>
+    </Link>
+  );
+}
+```
+
+### 2.5 Página de Detalle de Producto
+
+```typescript
+// src/app/[locale]/productos/[slug]/page.tsx
 import { tiendanubeApi } from '@/lib/tiendanube/client';
 import { TiendanubeProduct } from '@/lib/tiendanube/types';
 import { notFound } from 'next/navigation';
-import ProductGallery from '@/components/product/ProductGallery';
-import AddToCartButton from '@/components/cart/AddToCartButton';
+import ProductGallery from '@/app/components/product/ProductGallery';
+import AddToCartButton from '@/app/components/cart/AddToCartButton';
+import { setRequestLocale } from 'next-intl/server';
+import { Metadata } from 'next';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ locale: string; slug: string }>;
 }
 
-// Generar rutas estáticas para productos
 export async function generateStaticParams() {
   const products = await tiendanubeApi<TiendanubeProduct[]>(
     '/products?per_page=100&published=true'
   );
   
-  return products.map((product) => ({
-    slug: product.handle.es,
-  }));
+  // Generar rutas para ambos idiomas
+  const paths: { locale: string; slug: string }[] = [];
+  
+  products.forEach((product) => {
+    if (product.handle.es) {
+      paths.push({ locale: 'es', slug: product.handle.es });
+    }
+    if (product.handle.en) {
+      paths.push({ locale: 'en', slug: product.handle.en });
+    }
+  });
+  
+  return paths;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, slug } = await params;
+  
+  const products = await tiendanubeApi<TiendanubeProduct[]>(
+    `/products?handle=${slug}`
+  );
+  const product = products[0];
+
+  if (!product) {
+    return { title: 'Producto no encontrado' };
+  }
+
+  const name = product.name[locale as 'es' | 'en'] || product.name.es;
+  const description = product.description[locale as 'es' | 'en'] || product.description.es;
+
+  return {
+    title: `${name} | Tu Tienda`,
+    description: description.slice(0, 160),
+    openGraph: {
+      images: product.images[0]?.src ? [product.images[0].src] : [],
+    },
+  };
 }
 
 export default async function ProductoPage({ params }: Props) {
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
+
   // Buscar por handle (slug)
   const products = await tiendanubeApi<TiendanubeProduct[]>(
-    `/products?handle=${params.slug}`,
-    { tags: ['products', `product-${params.slug}`] }
+    `/products?handle=${slug}`,
+    { tags: ['products', `product-${slug}`] }
   );
 
   const product = products[0];
@@ -312,41 +509,55 @@ export default async function ProductoPage({ params }: Props) {
     ? parseFloat(mainVariant.compare_at_price) 
     : null;
 
+  const name = product.name[locale as 'es' | 'en'] || product.name.es;
+  const description = product.description[locale as 'es' | 'en'] || product.description.es;
+
   return (
-    <main className="section-container">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Galería de imágenes */}
-        <ProductGallery images={product.images} />
+    <main className="pt-14 sm:pt-16">
+      <section className="section-container">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
+          {/* Galería de imágenes */}
+          <ProductGallery images={product.images} />
 
-        {/* Info del producto */}
-        <div className="space-y-4">
-          <h1 className="text-2xl sm:text-3xl font-bold">
-            {product.name.es}
-          </h1>
+          {/* Info del producto */}
+          <div className="space-y-4 sm:space-y-6">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+              {name}
+            </h1>
 
-          <div className="flex items-baseline gap-3">
-            <span className="text-2xl font-bold text-primary">
-              ${price.toLocaleString('es-AR')}
-            </span>
-            {comparePrice && (
-              <span className="text-lg text-gray-400 line-through">
-                ${comparePrice.toLocaleString('es-AR')}
+            <div className="flex items-baseline gap-3">
+              <span className="text-2xl sm:text-3xl font-bold text-primary">
+                ${price.toLocaleString('es-AR')}
               </span>
+              {comparePrice && (
+                <span className="text-lg text-gray-400 line-through">
+                  ${comparePrice.toLocaleString('es-AR')}
+                </span>
+              )}
+            </div>
+
+            {product.free_shipping && (
+              <div className="inline-block bg-primary/10 text-primary text-sm px-3 py-1 rounded-full">
+                Envío gratis
+              </div>
             )}
+
+            <div 
+              className="text-sm sm:text-base text-gray-300 prose prose-invert max-w-none"
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
+
+            <AddToCartButton 
+              productId={product.id}
+              variantId={mainVariant.id}
+              name={name}
+              price={price}
+              image={product.images[0]?.src || ''}
+              stock={mainVariant.stock}
+            />
           </div>
-
-          <div 
-            className="text-gray-300 prose prose-invert"
-            dangerouslySetInnerHTML={{ __html: product.description.es }}
-          />
-
-          <AddToCartButton 
-            productId={product.id}
-            variantId={mainVariant.id}
-            stock={mainVariant.stock}
-          />
         </div>
-      </div>
+      </section>
     </main>
   );
 }
@@ -356,7 +567,7 @@ export default async function ProductoPage({ params }: Props) {
 
 ## Fase 3: Carrito de Compras (Semana 4)
 
-### 3.1 Store con Zustand
+### 3.1 Store con Zustand (Mobile-First)
 
 ```typescript
 // src/stores/cart-store.ts
@@ -435,14 +646,16 @@ export const useCartStore = create<CartStore>()(
 );
 ```
 
-### 3.2 Componente AddToCartButton
+### 3.2 Componente AddToCartButton (Mobile-First)
 
 ```typescript
-// src/components/cart/AddToCartButton.tsx
+// src/app/components/cart/AddToCartButton.tsx
 'use client';
 
 import { useCartStore } from '@/stores/cart-store';
 import { ShoppingCart } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 
 interface Props {
   productId: number;
@@ -461,8 +674,10 @@ export default function AddToCartButton({
   image,
   stock 
 }: Props) {
+  const t = useTranslations('Ecommerce');
   const addItem = useCartStore((state) => state.addItem);
   const items = useCartStore((state) => state.items);
+  const [isAdding, setIsAdding] = useState(false);
   
   const currentInCart = items.find(i => i.variantId === variantId)?.quantity || 0;
   const isOutOfStock = stock !== null && stock <= 0;
@@ -470,22 +685,107 @@ export default function AddToCartButton({
 
   const handleAdd = () => {
     if (isOutOfStock || reachedLimit) return;
+    
+    setIsAdding(true);
     addItem({ productId, variantId, name, price, image });
+    
+    setTimeout(() => setIsAdding(false), 300);
   };
 
   return (
     <button
       onClick={handleAdd}
-      disabled={isOutOfStock || reachedLimit}
-      className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+      disabled={isOutOfStock || reachedLimit || isAdding}
+      className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
     >
-      <ShoppingCart size={20} />
-      {isOutOfStock 
-        ? 'Sin stock' 
-        : reachedLimit 
-        ? 'Máximo alcanzado'
-        : 'Agregar al carrito'}
+      <ShoppingCart size={18} className={isAdding ? 'animate-bounce' : ''} />
+      <span className="text-sm sm:text-base">
+        {isOutOfStock 
+          ? t('outOfStock')
+          : reachedLimit 
+          ? 'Máximo alcanzado'
+          : t('addToCart')}
+      </span>
     </button>
+  );
+}
+```
+
+### 3.3 Componente CartItem (Mobile-First)
+
+```typescript
+// src/app/components/cart/CartItem.tsx
+'use client';
+
+import Image from 'next/image';
+import { Minus, Plus, Trash2 } from 'lucide-react';
+import { useCartStore, CartItem as CartItemType } from '@/stores/cart-store';
+
+interface Props {
+  item: CartItemType;
+}
+
+export default function CartItem({ item }: Props) {
+  const { updateQuantity, removeItem } = useCartStore();
+
+  return (
+    <div className="flex gap-3 sm:gap-4 bg-dark-lighter p-3 sm:p-4 rounded-lg">
+      {/* Imagen */}
+      <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 rounded overflow-hidden">
+        <Image
+          src={item.image}
+          alt={item.name}
+          fill
+          className="object-cover"
+        />
+      </div>
+
+      {/* Info */}
+      <div className="flex-1 min-w-0">
+        <h3 className="text-sm sm:text-base font-semibold mb-1 sm:mb-2 line-clamp-2">
+          {item.name}
+        </h3>
+        <p className="text-base sm:text-lg font-bold text-primary mb-2 sm:mb-3">
+          ${item.price.toLocaleString('es-AR')}
+        </p>
+
+        {/* Controles mobile-first */}
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 bg-dark border border-dark-lighter rounded-lg">
+            <button
+              onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
+              className="p-2 hover:bg-dark-lighter transition-colors rounded-l-lg"
+            >
+              <Minus size={14} />
+            </button>
+            <span className="px-3 text-sm font-medium min-w-[2rem] text-center">
+              {item.quantity}
+            </span>
+            <button
+              onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
+              className="p-2 hover:bg-dark-lighter transition-colors rounded-r-lg"
+            >
+              <Plus size={14} />
+            </button>
+          </div>
+
+          <button
+            onClick={() => removeItem(item.variantId)}
+            className="p-2 text-gray-400 hover:text-red-500 transition-colors"
+          >
+            <Trash2 size={18} />
+          </button>
+        </div>
+      </div>
+
+      {/* Subtotal (solo visible en sm+) */}
+      <div className="hidden sm:flex flex-col items-end justify-between">
+        <p className="text-sm text-gray-400">Subtotal</p>
+        <p className="text-lg font-bold">
+          ${(item.price * item.quantity).toLocaleString('es-AR')}
+        </p>
+      </div>
+    </div>
   );
 }
 ```
@@ -494,9 +794,7 @@ export default function AddToCartButton({
 
 ## Fase 4: Checkout (Semana 5)
 
-### 4.1 Flujo de Checkout con Tiendanube
-
-Tiendanube maneja el checkout completo. Tu trabajo es redirigir al usuario.
+### 4.1 API Route para Checkout
 
 ```typescript
 // src/app/api/tiendanube/checkout/route.ts
@@ -525,7 +823,6 @@ export async function POST(request: NextRequest) {
       }
     );
 
-    // Devolver URL de checkout de Tiendanube
     return NextResponse.json({ 
       checkoutUrl: cart.checkout_url 
     });
@@ -538,18 +835,21 @@ export async function POST(request: NextRequest) {
 }
 ```
 
-### 4.2 Página de Carrito con Botón de Checkout
+### 4.2 Página de Carrito (Mobile-First con i18n)
 
 ```typescript
-// src/app/carrito/page.tsx
+// src/app/[locale]/carrito/page.tsx
 'use client';
 
 import { useCartStore } from '@/stores/cart-store';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
 import { useState } from 'react';
-import CartItem from '@/components/cart/CartItem';
+import CartItem from '@/app/components/cart/CartItem';
+import { useTranslations } from 'next-intl';
+import { ShoppingBag, ArrowRight } from 'lucide-react';
 
 export default function CarritoPage() {
+  const t = useTranslations('Ecommerce');
   const { items, totalPrice, clearCart } = useCartStore();
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -584,51 +884,86 @@ export default function CarritoPage() {
 
   if (items.length === 0) {
     return (
-      <main className="section-container text-center">
-        <h1 className="text-2xl font-bold mb-4">Tu carrito está vacío</h1>
-        <a href="/productos" className="btn-primary">
-          Ver productos
-        </a>
+      <main className="pt-14 sm:pt-16 min-h-screen flex items-center justify-center">
+        <div className="text-center px-4">
+          <ShoppingBag size={64} className="mx-auto mb-4 text-gray-400" />
+          <h1 className="text-2xl sm:text-3xl font-bold mb-4">
+            {t('emptyCart')}
+          </h1>
+          <button 
+            onClick={() => router.push('/productos')}
+            className="btn-primary"
+          >
+            {t('continueShopping')}
+          </button>
+        </div>
       </main>
     );
   }
 
   return (
-    <main className="section-container">
-      <h1 className="text-2xl sm:text-3xl font-bold mb-6">Tu Carrito</h1>
+    <main className="pt-14 sm:pt-16">
+      <section className="section-container">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
+          {t('cart')}
+        </h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Lista de items */}
-        <div className="lg:col-span-2 space-y-4">
-          {items.map((item) => (
-            <CartItem key={item.variantId} item={item} />
-          ))}
-        </div>
-
-        {/* Resumen */}
-        <div className="bg-dark-lighter p-6 rounded-lg h-fit">
-          <h2 className="text-xl font-bold mb-4">Resumen</h2>
-          
-          <div className="flex justify-between mb-4">
-            <span className="text-gray-300">Subtotal</span>
-            <span className="font-bold">
-              ${totalPrice().toLocaleString('es-AR')}
-            </span>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+          {/* Lista de items */}
+          <div className="lg:col-span-2 space-y-3 sm:space-y-4">
+            {items.map((item) => (
+              <CartItem key={item.variantId} item={item} />
+            ))}
           </div>
 
-          <p className="text-sm text-gray-400 mb-4">
-            Envío calculado en el checkout
-          </p>
+          {/* Resumen - Sticky en desktop */}
+          <div className="lg:sticky lg:top-20 h-fit">
+            <div className="bg-dark-lighter p-4 sm:p-6 rounded-lg border border-dark-lighter">
+              <h2 className="text-lg sm:text-xl font-bold mb-4">
+                Resumen del pedido
+              </h2>
+              
+              <div className="space-y-3 mb-4 pb-4 border-b border-dark">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-300">Subtotal</span>
+                  <span className="font-semibold">
+                    ${totalPrice().toLocaleString('es-AR')}
+                  </span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-300">Envío</span>
+                  <span className="text-gray-400 text-xs">
+                    Calculado en checkout
+                  </span>
+                </div>
+              </div>
 
-          <button
-            onClick={handleCheckout}
-            disabled={isLoading}
-            className="btn-primary w-full"
-          >
-            {isLoading ? 'Procesando...' : 'Finalizar compra'}
-          </button>
+              <div className="flex justify-between mb-6">
+                <span className="text-base font-bold">Total</span>
+                <span className="text-xl font-bold text-primary">
+                  ${totalPrice().toLocaleString('es-AR')}
+                </span>
+              </div>
+
+              <button
+                onClick={handleCheckout}
+                disabled={isLoading}
+                className="btn-primary w-full flex items-center justify-center gap-2"
+              >
+                <span>{isLoading ? 'Procesando...' : t('checkout')}</span>
+                {!isLoading && <ArrowRight size={18} />}
+              </button>
+
+              <button
+                onClick={() => router.push('/productos')}
+                className="btn-secondary w-full mt-3"
+              >
+                {t('continueShopping')}
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }
@@ -638,40 +973,81 @@ export default function CarritoPage() {
 
 ## Fase 5: SEO y Performance (Semana 6)
 
-### 5.1 Metadata Dinámica
+### 5.1 Sitemap Multilenguaje
 
 ```typescript
-// src/app/productos/[slug]/page.tsx
-import { Metadata } from 'next';
+// src/app/sitemap.ts
+import { MetadataRoute } from 'next';
+import { tiendanubeApi } from '@/lib/tiendanube/client';
+import { TiendanubeProduct } from '@/lib/tiendanube/types';
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://tu-dominio.com';
+  
   const products = await tiendanubeApi<TiendanubeProduct[]>(
-    `/products?handle=${params.slug}`
+    '/products?per_page=100&published=true'
   );
-  const product = products[0];
 
-  if (!product) {
-    return { title: 'Producto no encontrado' };
-  }
+  const productUrls: MetadataRoute.Sitemap = [];
+  
+  products.forEach((product) => {
+    // Español
+    if (product.handle.es) {
+      productUrls.push({
+        url: `${baseUrl}/es/productos/${product.handle.es}`,
+        lastModified: new Date(product.updated_at),
+        changeFrequency: 'weekly',
+        priority: 0.8,
+      });
+    }
+    // Inglés
+    if (product.handle.en) {
+      productUrls.push({
+        url: `${baseUrl}/en/productos/${product.handle.en}`,
+        lastModified: new Date(product.updated_at),
+        changeFrequency: 'weekly',
+        priority: 0.8,
+      });
+    }
+  });
 
-  return {
-    title: `${product.name.es} | Tu Tienda`,
-    description: product.description.es.slice(0, 160),
-    openGraph: {
-      images: product.images[0]?.src ? [product.images[0].src] : [],
+  return [
+    {
+      url: `${baseUrl}/es`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 1,
     },
-  };
+    {
+      url: `${baseUrl}/en`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 1,
+    },
+    {
+      url: `${baseUrl}/es/productos`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/en/productos`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
+    ...productUrls,
+  ];
 }
 ```
 
-### 5.2 Revalidación de Datos
+### 5.2 Revalidación de Datos con Webhook
 
 ```typescript
 // src/app/api/revalidate/route.ts
 import { revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
-// Webhook de Tiendanube para invalidar cache
 export async function POST(request: NextRequest) {
   const secret = request.headers.get('x-webhook-secret');
   
@@ -681,52 +1057,93 @@ export async function POST(request: NextRequest) {
 
   const body = await request.json();
   
-  // Invalidar cache según el evento
+  // Invalidar cache según el evento de Tiendanube
   if (body.event.includes('product')) {
     revalidateTag('products');
+    
+    // Si es un producto específico, invalidar su tag también
+    if (body.id) {
+      revalidateTag(`product-${body.id}`);
+    }
   }
 
-  return NextResponse.json({ revalidated: true });
+  return NextResponse.json({ revalidated: true, now: Date.now() });
 }
 ```
 
 ---
 
-## Cronograma
+## Cronograma Actualizado
 
 | Fase | Duración | Entregable |
 |------|----------|------------|
-| 1. Config Base | 1 semana | Proyecto configurado, cliente API |
-| 2. Catálogo | 2 semanas | Listado, detalle, categorías |
-| 3. Carrito | 1 semana | Carrito funcional con Zustand |
+| 1. Config Base + i18n | 1 semana | Cliente API, traducciones e-commerce |
+| 2. Catálogo Multilenguaje | 2 semanas | Listado, detalle, categorías (ES/EN) |
+| 3. Carrito | 1 semana | Carrito funcional con traducciones |
 | 4. Checkout | 1 semana | Integración checkout Tiendanube |
-| 5. SEO/Perf | 1 semana | Metadata, sitemap, optimizaciones |
+| 5. SEO/Perf | 1 semana | Sitemap i18n, metadata, webhooks |
 | **Total** | **6 semanas** | |
 
 ---
 
-## Dependencias
+## Dependencias Actualizadas (package.json)
 
 ```json
 {
+  "name": "portfolio-lisandro-ecommerce",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
   "dependencies": {
-    "next": "14.2.15",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "zustand": "^4.5.5",
-    "@tanstack/react-query": "^5.56.2",
-    "lucide-react": "^0.441.0"
+    "@next/font": "^14.2.15",
+    "lucide-react": "^0.561.0",
+    "next": "14.2.35",
+    "next-intl": "^3.22.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "zustand": "^4.5.5"
   },
   "devDependencies": {
-    "typescript": "^5.6.2",
-    "@types/node": "^22.5.5",
-    "@types/react": "^18.3.5",
-    "tailwindcss": "^3.4.11",
-    "postcss": "^8.4.45",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "14.2.15"
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "^14.2.20",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }
+```
+
+---
+
+## Configuración de Amplify (Actualizada)
+
+```yaml
+# amplify.yml
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci --cache .npm --prefer-offline
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - .next/cache/**/*
+      - .npm/**/*
 ```
 
 ---
@@ -737,8 +1154,9 @@ export async function POST(request: NextRequest) {
 # Tiendanube
 TIENDANUBE_STORE_ID=tu_store_id
 TIENDANUBE_ACCESS_TOKEN=tu_token
+TIENDANUBE_API_URL=https://api.tiendanube.com/v1
 
-# Opcional: para webhooks
+# Webhooks (opcional)
 WEBHOOK_SECRET=clave_secreta_webhooks
 
 # App
@@ -747,9 +1165,90 @@ NEXT_PUBLIC_SITE_URL=https://tudominio.com
 
 ---
 
+## Traducciones de E-commerce (Agregar a messages/*.json)
+
+### messages/es.json
+
+```json
+{
+  "Ecommerce": {
+    "products": "Productos",
+    "categories": "Categorías",
+    "cart": "Carrito",
+    "addToCart": "Agregar al carrito",
+    "outOfStock": "Sin stock",
+    "price": "Precio",
+    "compareAt": "Antes",
+    "freeShipping": "Envío gratis",
+    "quantity": "Cantidad",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "checkout": "Finalizar compra",
+    "emptyCart": "Tu carrito está vacío",
+    "continueShopping": "Seguir comprando",
+    "viewProduct": "Ver producto",
+    "backToProducts": "Volver a productos",
+    "loadMore": "Cargar más",
+    "filter": "Filtrar",
+    "sortBy": "Ordenar por",
+    "priceAsc": "Precio: menor a mayor",
+    "priceDesc": "Precio: mayor a menor",
+    "newest": "Más recientes",
+    "featured": "Destacados"
+  }
+}
+```
+
+### messages/en.json
+
+```json
+{
+  "Ecommerce": {
+    "products": "Products",
+    "categories": "Categories",
+    "cart": "Cart",
+    "addToCart": "Add to cart",
+    "outOfStock": "Out of stock",
+    "price": "Price",
+    "compareAt": "Before",
+    "freeShipping": "Free shipping",
+    "quantity": "Quantity",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "emptyCart": "Your cart is empty",
+    "continueShopping": "Continue shopping",
+    "viewProduct": "View product",
+    "backToProducts": "Back to products",
+    "loadMore": "Load more",
+    "filter": "Filter",
+    "sortBy": "Sort by",
+    "priceAsc": "Price: low to high",
+    "priceDesc": "Price: high to low",
+    "newest": "Newest",
+    "featured": "Featured"
+  }
+}
+```
+
+---
+
 ## Notas Importantes
 
-1. **El token NUNCA va al cliente** - Solo se usa en API Routes y Server Components
-2. **Cache agresivo** - Productos cambian poco, usá `force-cache` y revalidá con webhooks
-3. **El checkout es de Tiendanube** - No reinventes la rueda, redirigí al usuario
-4. **Mobile-first** - Todo el CSS empieza desde 320px
+1. **Mobile-First**: Todos los componentes empiezan desde 320px
+2. **i18n integrado**: Productos soportan ES/EN desde Tiendanube
+3. **Token seguro**: Solo en API Routes y Server Components
+4. **Cache optimizado**: ISR con revalidación por webhooks
+5. **Checkout externo**: Redirige a Tiendanube para pagos
+6. **Rutas multilenguaje**: Slugs diferentes por idioma (`/es/productos/remera` vs `/en/productos/shirt`)
+
+---
+
+## Próximos Pasos
+
+1. Agregar las traducciones a `messages/es.json` y `messages/en.json`
+2. Instalar Zustand: `npm install zustand`
+3. Obtener credenciales de Tiendanube
+4. Configurar variables de entorno
+5. Implementar cliente API de Tiendanube
+6. Crear componentes base del catálogo
