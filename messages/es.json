@@ -1,0 +1,167 @@
+{
+  "Metadata": {
+    "title": "Lisandro Andia | Ingeniero en Sistemas",
+    "description": "Portfolio profesional de Lisandro Andia - Ingeniero en Sistemas, especializado en desarrollo de aplicaciones web Next.js y Spring Boot"
+  },
+  "Navbar": {
+    "projects": "Proyectos",
+    "services": "Servicios",
+    "about": "Sobre Mí",
+    "contact": "Contacto"
+  },
+  "Hero": {
+    "name": "Lisandro Andia",
+    "role": "Ingeniero en Sistemas | Desarrollador Full Stack",
+    "description": "Especializado en crear experiencias web modernas y escalables. Con experiencia en el ciclo de vida completo del desarrollo de software.",
+    "viewProjects": "Ver Proyectos",
+    "contactMe": "Contactar"
+  },
+  "Projects": {
+    "title": "Mis Proyectos",
+    "subtitle": "Una selección de proyectos que demuestran mi experiencia en diferentes tecnologías y soluciones.",
+    "viewProject": "Ver Proyecto",
+    "demo": "Demo",
+    "items": {
+      "lostilos": {
+        "title": "Sistema de Gestión de Socios",
+        "description": "Una aplicación web completa para gestionar socios con autenticación, categorización y seguimiento."
+      },
+      "hexagon": {
+        "title": "Desarrollo Web Hexagon Solutions",
+        "description": "Desarrollo de sitio web completo para Hexagon Solutions con diseño moderno y optimizado para SEO."
+      },
+      "estudioandia": {
+        "title": "Desarrollo Web Estudio Andia",
+        "description": "Desarrollo de sitio web completo para Estudio Andia con diseño moderno y optimizado para SEO."
+      }
+    }
+  },
+  "About": {
+    "title": "Sobre Mí",
+    "trajectory": "Mi Trayectoria Profesional",
+    "experiences": {
+      "ntt": {
+        "role": "Liferay Developer",
+        "company": "NTT DATA",
+        "period": "septiembre 2025 - presente",
+        "description": "Desarrollo de portales y aplicaciones con Liferay DXP. Personalización de themes y hooks. Integración con servicios externos."
+      },
+      "certant": {
+        "role": "Desarrollador Full Stack Junior",
+        "company": "Certant SA",
+        "period": "junio 2024 - septiembre 2025",
+        "description": "Desarrollo de sitios web cliente-servidor. Mantenimiento y actualización de CMS. API REST con recursos clásicos."
+      }
+    }
+  },
+  "Contact": {
+    "title": "Contacto",
+    "subtitle": "¿Tienes un proyecto en mente? ¡Hablemos!",
+    "form": {
+      "name": "Nombre",
+      "namePlaceholder": "Tu nombre",
+      "email": "Email",
+      "emailPlaceholder": "tu@email.com",
+      "message": "Mensaje",
+      "messagePlaceholder": "Cuéntame sobre tu proyecto...",
+      "submit": "Enviar Mensaje",
+      "sending": "Enviando...",
+      "success": "¡Mensaje enviado correctamente!",
+      "required": "*"
+    },
+    "findMe": "Encuéntrame en:",
+    "socialMedia": "Redes Sociales:",
+    "location": "Mendoza, Argentina"
+  },
+  "Footer": {
+    "rights": "© 2025 Lisandro Andia. Todos los derechos reservados."
+  },
+  "NotFound": {
+    "title": "Página No Encontrada",
+    "description": "Lo sentimos, la página que estás buscando no existe o ha sido movida.",
+    "backHome": "Volver al Inicio",
+    "previousPage": "Página Anterior",
+    "explore": "O puedes explorar:",
+    "myProjects": "Mis Proyectos",
+    "aboutMe": "Sobre Mí",
+    "contact": "Contacto"
+  },
+  "Services": {
+    "heroTitle": "Planes de Desarrollo Web",
+    "heroSubtitle": "Soluciones adaptadas a tus necesidades. Desde una landing page hasta una tienda online completa.",
+    "recommended": "⭐ Recomendado",
+    "delivery": "Entrega:",
+    "requestQuote": "Solicitar Cotización",
+    "faqTitle": "Preguntas Frecuentes",
+    "ctaTitle": "¿Listo para empezar?",
+    "ctaSubtitle": "Contáctame para discutir tu proyecto y obtener un presupuesto personalizado.",
+    "sendEmail": "Enviar Email",
+    "useContactForm": "O usa el formulario de contacto →",
+    "plans": {
+      "landing": {
+        "title": "Landing Esencial",
+        "price": "$199",
+        "description": "Presencia web rápida y efectiva",
+        "deliveryTime": "2-3 semanas",
+        "features": [
+          "Landing page de 1-3 secciones",
+          "Diseño basado en templates modernos",
+          "100% responsive (móvil y desktop)",
+          "Formulario de contacto funcional",
+          "1 ronda de revisión"
+        ]
+      },
+      "professional": {
+        "title": "Web Profesional",
+        "price": "$299",
+        "description": "Solución completa y escalable",
+        "deliveryTime": "3-4 semanas",
+        "features": [
+          "SPA completa desarrollada con Next.js",
+          "5-7 secciones personalizadas",
+          "Diseño único adaptado a tu marca",
+          "SEO optimizado (meta tags, sitemap, performance)",
+          "Animaciones y transiciones suaves",
+          "Formularios avanzados (contacto, newsletter)",
+          "2 rondas de revisión",
+          "1 mes de soporte básico incluido"
+        ]
+      },
+      "ecommerce": {
+        "title": "Solución E-commerce",
+        "price": "$999",
+        "description": "Vende online desde el día uno",
+        "deliveryTime": "10-12 semanas",
+        "note": "Requiere suscripción a la plataforma e-commerce",
+        "features": [
+          "Todo lo del Plan Profesional",
+          "Integración completa con Tiendanube/Shopify",
+          "Catálogo de productos personalizado",
+          "Carrito de compras funcional",
+          "Checkout integrado",
+          "Panel de administración",
+          "3 rondas de revisión",
+          "3 meses de mantenimiento incluido"
+        ]
+      }
+    },
+    "faq": {
+      "revision": {
+        "question": "¿Qué es una ronda de revisión?",
+        "answer": "Cada ronda permite modificaciones de textos, imágenes, colores y ajustes de diseño. No incluye cambios de estructura completa ni funcionalidades adicionales no acordadas inicialmente."
+      },
+      "maintenance": {
+        "question": "¿Qué incluye el mantenimiento básico?",
+        "answer": "Incluye actualización de contenidos (2-3 cambios por mes), cambios de textos e imágenes, actualización de información de contacto, corrección de bugs y actualizaciones de seguridad de dependencias."
+      },
+      "additional": {
+        "question": "¿Puedo agregar funcionalidades adicionales?",
+        "answer": "Sí, el desarrollo de nuevas funcionalidades se cotiza por separado según la complejidad del requerimiento."
+      }
+    }
+  },
+  "LanguageSwitcher": {
+    "es": "Español",
+    "en": "English"
+  }
+}

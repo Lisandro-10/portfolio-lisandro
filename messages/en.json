@@ -1,0 +1,167 @@
+{
+  "Metadata": {
+    "title": "Lisandro Andia | Systems Engineer",
+    "description": "Professional portfolio of Lisandro Andia - Systems Engineer, specialized in Next.js and Spring Boot web application development"
+  },
+  "Navbar": {
+    "projects": "Projects",
+    "services": "Services",
+    "about": "About Me",
+    "contact": "Contact"
+  },
+  "Hero": {
+    "name": "Lisandro Andia",
+    "role": "Systems Engineer | Full Stack Developer",
+    "description": "Specialized in creating modern and scalable web experiences. With experience in the complete software development lifecycle.",
+    "viewProjects": "View Projects",
+    "contactMe": "Contact"
+  },
+  "Projects": {
+    "title": "My Projects",
+    "subtitle": "A selection of projects demonstrating my experience with different technologies and solutions.",
+    "viewProject": "View Project",
+    "demo": "Demo",
+    "items": {
+      "lostilos": {
+        "title": "Partner Management System",
+        "description": "A web application to manage partners with authentication, categorization, and tracking."
+      },
+      "hexagon": {
+        "title": "Hexagon Solutions Web Development",
+        "description": "Website development for Hexagon Solutions with modern design and SEO optimized."
+      },
+      "estudioandia": {
+        "title": "Estudio Andia Web Development",
+        "description": "Simple static website built with HTML, CSS, and JavaScript."
+      }
+    }
+  },
+  "About": {
+    "title": "About Me",
+    "trajectory": "My Professional Journey",
+    "experiences": {
+      "ntt": {
+        "role": "Liferay Developer",
+        "company": "NTT DATA",
+        "period": "September 2025 - present",
+        "description": "Development of portals and applications with Liferay DXP. Theme and hook customization. Integration with external services."
+      },
+      "certant": {
+        "role": "Junior Full Stack Developer",
+        "company": "Certant SA",
+        "period": "June 2024 - September 2025",
+        "description": "Client-server website development. CMS maintenance and updates. REST API with classic resources."
+      }
+    }
+  },
+  "Contact": {
+    "title": "Contact",
+    "subtitle": "Have a project in mind? Let's talk!",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "message": "Message",
+      "messagePlaceholder": "Tell me about your project...",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully!",
+      "required": "*"
+    },
+    "findMe": "Find me at:",
+    "socialMedia": "Social Media:",
+    "location": "Mendoza, Argentina"
+  },
+  "Footer": {
+    "rights": "© 2025 Lisandro Andia. All rights reserved."
+  },
+  "NotFound": {
+    "title": "Page Not Found",
+    "description": "Sorry, the page you are looking for does not exist or has been moved.",
+    "backHome": "Back to Home",
+    "previousPage": "Previous Page",
+    "explore": "Or you can explore:",
+    "myProjects": "My Projects",
+    "aboutMe": "About Me",
+    "contact": "Contact"
+  },
+  "Services": {
+    "heroTitle": "Web Development Plans",
+    "heroSubtitle": "Solutions tailored to your needs. From a landing page to a complete online store.",
+    "recommended": "⭐ Recommended",
+    "delivery": "Delivery:",
+    "requestQuote": "Request Quote",
+    "faqTitle": "Frequently Asked Questions",
+    "ctaTitle": "Ready to start?",
+    "ctaSubtitle": "Contact me to discuss your project and get a personalized quote.",
+    "sendEmail": "Send Email",
+    "useContactForm": "Or use the contact form →",
+    "plans": {
+      "landing": {
+        "title": "Essential Landing",
+        "price": "$199",
+        "description": "Quick and effective web presence",
+        "deliveryTime": "2-3 weeks",
+        "features": [
+          "Landing page with 1-3 sections",
+          "Design based on modern templates",
+          "100% responsive (mobile and desktop)",
+          "Functional contact form",
+          "1 revision round"
+        ]
+      },
+      "professional": {
+        "title": "Professional Web",
+        "price": "$299",
+        "description": "Complete and scalable solution",
+        "deliveryTime": "3-4 weeks",
+        "features": [
+          "Complete SPA developed with Next.js",
+          "5-7 customized sections",
+          "Unique design adapted to your brand",
+          "SEO optimized (meta tags, sitemap, performance)",
+          "Smooth animations and transitions",
+          "Advanced forms (contact, newsletter)",
+          "2 revision rounds",
+          "1 month of basic support included"
+        ]
+      },
+      "ecommerce": {
+        "title": "E-commerce Solution",
+        "price": "$999",
+        "description": "Sell online from day one",
+        "deliveryTime": "10-12 weeks",
+        "note": "Requires e-commerce platform subscription",
+        "features": [
+          "Everything in the Professional Plan",
+          "Complete integration with Tiendanube/Shopify",
+          "Custom product catalog",
+          "Functional shopping cart",
+          "Integrated checkout",
+          "Admin panel",
+          "3 revision rounds",
+          "3 months of maintenance included"
+        ]
+      }
+    },
+    "faq": {
+      "revision": {
+        "question": "What is a revision round?",
+        "answer": "Each round allows modifications of texts, images, colors, and design adjustments. It does not include complete structure changes or additional functionalities not initially agreed upon."
+      },
+      "maintenance": {
+        "question": "What does basic maintenance include?",
+        "answer": "Includes content updates (2-3 changes per month), text and image changes, contact information updates, bug fixes, and dependency security updates."
+      },
+      "additional": {
+        "question": "Can I add additional functionalities?",
+        "answer": "Yes, the development of new functionalities is quoted separately according to the complexity of the requirement."
+      }
+    }
+  },
+  "LanguageSwitcher": {
+    "es": "Español",
+    "en": "English"
+  }
+}

@@ -1,16 +1,22 @@
 "use client";
 
-import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, Moon, Sun, X, Globe } from "lucide-react";
 import { useTheme } from "@/app/hooks/useTheme";
+import { useTranslations, useLocale } from "next-intl";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const t = useTranslations("Navbar");
+  const tLang = useTranslations("LanguageSwitcher");
+  const locale = useLocale();
+  const pathname = usePathname();
+  const router = useRouter();
 
-  // Detectar scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -19,7 +25,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevenir scroll cuando el menú móvil está abierto
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -31,16 +36,20 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
+  const handleLanguageChange = (newLocale: string) => {
+    router.replace(pathname, { locale: newLocale });
+    setLangMenuOpen(false);
+  };
+
   const navItems = [
-    { name: "Proyectos", href: "/#proyectos" },
-    { name: "Servicios", href: "/servicios" },
-    { name: "Sobre Mí", href: "/#sobre-mi" },
-    { name: "Contacto", href: "/#contacto" },
+    { name: t("projects"), href: "/#proyectos" },
+    { name: t("services"), href: "/servicios" },
+    { name: t("about"), href: "/#sobre-mi" },
+    { name: t("contact"), href: "/#contacto" },
   ];
 
   return (
     <>
-      {/* Navbar */}
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           isScrolled && !isOpen
@@ -52,9 +61,8 @@ export default function Navbar() {
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-14 sm:h-16">
-            {/* Logo */}
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="text-base sm:text-lg md:text-xl font-bold text-primary hover:text-primary/80 transition-colors"
             >
               Lisandro Andia
@@ -71,8 +79,39 @@ export default function Navbar() {
                   {item.name}
                 </Link>
               ))}
-              
-              {/* Theme Toggle - Desktop */}
+
+              {/* Language Switcher - Desktop */}
+              <div className="relative">
+                <button
+                  onClick={() => setLangMenuOpen(!langMenuOpen)}
+                  className="p-2 text-white hover:text-primary transition-colors rounded-lg hover:bg-dark-lighter flex items-center gap-1"
+                  aria-label="Change language"
+                >
+                  <Globe size={20} />
+                  <span className="text-xs uppercase">{locale}</span>
+                </button>
+                {langMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-32 bg-dark-lighter border border-dark rounded-lg shadow-lg overflow-hidden">
+                    <button
+                      onClick={() => handleLanguageChange("es")}
+                      className={`w-full px-4 py-2 text-left text-sm hover:bg-dark transition-colors ${
+                        locale === "es" ? "text-primary" : "text-gray-300"
+                      }`}
+                    >
+                      {tLang("es")}
+                    </button>
+                    <button
+                      onClick={() => handleLanguageChange("en")}
+                      className={`w-full px-4 py-2 text-left text-sm hover:bg-dark transition-colors ${
+                        locale === "en" ? "text-primary" : "text-gray-300"
+                      }`}
+                    >
+                      {tLang("en")}
+                    </button>
+                  </div>
+                )}
+              </div>
+
               <button
                 onClick={toggleTheme}
                 className="p-2 text-white hover:text-primary transition-colors rounded-lg hover:bg-dark-lighter"
@@ -84,7 +123,37 @@ export default function Navbar() {
 
             {/* Mobile Controls */}
             <div className="md:hidden flex items-center gap-2">
-              {/* Theme Toggle - Mobile */}
+              {/* Language Switcher - Mobile */}
+              <div className="relative">
+                <button
+                  onClick={() => setLangMenuOpen(!langMenuOpen)}
+                  className="p-2 text-white hover:text-primary transition-colors rounded-lg hover:bg-dark-lighter"
+                  aria-label="Change language"
+                >
+                  <Globe size={20} />
+                </button>
+                {langMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-32 bg-dark-lighter border border-dark rounded-lg shadow-lg overflow-hidden z-50">
+                    <button
+                      onClick={() => handleLanguageChange("es")}
+                      className={`w-full px-4 py-2 text-left text-sm hover:bg-dark transition-colors ${
+                        locale === "es" ? "text-primary" : "text-gray-300"
+                      }`}
+                    >
+                      {tLang("es")}
+                    </button>
+                    <button
+                      onClick={() => handleLanguageChange("en")}
+                      className={`w-full px-4 py-2 text-left text-sm hover:bg-dark transition-colors ${
+                        locale === "en" ? "text-primary" : "text-gray-300"
+                      }`}
+                    >
+                      {tLang("en")}
+                    </button>
+                  </div>
+                )}
+              </div>
+
               <button
                 onClick={toggleTheme}
                 className="p-2 text-white hover:text-primary transition-colors rounded-lg hover:bg-dark-lighter"
@@ -93,7 +162,6 @@ export default function Navbar() {
                 {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
               </button>
 
-              {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="text-white p-1 hover:text-primary transition-colors"
