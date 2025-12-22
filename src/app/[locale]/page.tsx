@@ -1,6 +1,6 @@
 "use client";
 
-import ProjectCard from "../components/ProjectCard";
+import ProjectCard from "../components/landing/ProjectCard";
 import Image from "next/image";
 import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { useState } from "react";

@@ -1,6 +1,6 @@
 "use client";
 
-import PricingCard from "../../components/PricingCard";
+import PricingCard from "../../components/landing/PricingCard";
 import { Mail, Phone, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { useTranslations } from "next-intl";

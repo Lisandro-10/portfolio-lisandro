@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Navbar from "../components/Navbar";
-import { Footer } from "../components/Footer";
+import Navbar from "../components/layout/Navbar";
+import { Footer } from "../components/layout/Footer";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
-import { routing } from "@/i18n/routing";
+import { routing } from "@/src/i18n/routing";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
