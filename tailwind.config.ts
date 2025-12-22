@@ -14,14 +14,15 @@ const config: Config = {
           light: "#60A5FA",
           dark: "#2563EB",
         },
+        secondary: {
+          DEFAULT: "#F97316",
+          light: "#FDBA74",
+          dark: "#EA580C",
+        },
         dark: {
           DEFAULT: "#1E293B",
           lighter: "#334155",
           darker: "#0F172A",
-        },
-        accent: {
-          cyan: "#06B6D4",
-          purple: "#8B5CF6",
         },
         background: "var(--background)",
         foreground: "var(--foreground)",

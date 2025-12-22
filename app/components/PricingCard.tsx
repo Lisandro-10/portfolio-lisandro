@@ -76,7 +76,7 @@ export default function PricingCard({
           </p>
         )}
 
-        <a
+        {/* <a
           href="#contacto-servicios"
           className={`w-full py-2.5 sm:py-3 text-sm sm:text-base font-semibold rounded-lg text-center transition-all duration-300 ${
             isRecommended
@@ -85,7 +85,7 @@ export default function PricingCard({
           }`}
         >
           {t("requestQuote")}
-        </a>
+        </a> */}
       </div>
     </div>
   );
