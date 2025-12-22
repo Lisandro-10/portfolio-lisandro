@@ -21,6 +21,17 @@ export default function Home() {
 
     const form = e.currentTarget;
 
+    const serviceValue = (form.elements.namedItem("service") as HTMLSelectElement).value;
+    const serviceLabels: Record<string, string> = {
+      landing: t("Services.plans.landing.title"),
+      professional: t("Services.plans.professional.title"),
+      ecommerce: t("Services.plans.ecommerce.title"),
+    };
+
+    const subject = serviceValue 
+      ? `Consulta: ${serviceLabels[serviceValue]}` 
+      : "Consulta desde el portfolio";
+
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -31,7 +42,7 @@ export default function Home() {
         body: JSON.stringify({
           access_key: "75c18e52-bb2d-4a95-a933-f6f395a57ebb",
           name: (form.elements.namedItem("name") as HTMLInputElement).value,
-          subject: "Consulta desde el portfolio",
+          subject: subject,
           email: (form.elements.namedItem("email") as HTMLInputElement).value,
           message: (form.elements.namedItem("message") as HTMLTextAreaElement)
             .value,
@@ -221,6 +232,21 @@ export default function Home() {
                       placeholder={t("Contact.form.emailPlaceholder")}
                       required
                     />
+                  </div>
+                  <div>
+                    <label htmlFor="service" className="block text-sm font-medium mb-2">
+                      {t("Contact.form.service")}
+                    </label>
+                    <select 
+                      name="service" 
+                      id="service" 
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark border border-dark-lighter rounded-lg focus:outline-none focus:border-primary text-sm sm:text-base transition-colors appearance-none cursor-pointer"
+                    >
+                      <option value="">{t("Contact.form.servicePlaceholder")}</option>
+                      <option value="landing">{t("Contact.form.serviceLanding")}</option>
+                      <option value="professional">{t("Contact.form.serviceProfessional")}</option>
+                      <option value="ecommerce">{t("Contact.form.serviceEcommerce")}</option>
+                    </select>
                   </div>
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium mb-2">
