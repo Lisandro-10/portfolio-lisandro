@@ -23,7 +23,7 @@
     "demo": "Demo",
     "items": {
       "lostilos": {
-        "title": "Partner Management System",
+        "title": "Club Management System",
         "description": "A web application to manage partners with authentication, categorization, and tracking."
       },
       "hexagon": {
