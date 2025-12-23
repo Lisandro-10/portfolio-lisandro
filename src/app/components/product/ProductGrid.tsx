@@ -1,4 +1,3 @@
-// src/app/components/product/ProductGrid.tsx
 'use client';
 
 import { TiendanubeProduct } from '@/lib/tiendanube/types';

@@ -1,4 +1,3 @@
-// src/app/[locale]/productos/[slug]/page.tsx
 import { tiendanubeApi } from '@/lib/tiendanube/client';
 import { TiendanubeProduct } from '@/lib/tiendanube/types';
 import { notFound } from 'next/navigation';

@@ -1,4 +1,3 @@
-// src/app/[locale]/carrito/page.tsx
 'use client';
 
 import { useCartStore } from '@/stores/cart-store';

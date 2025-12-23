@@ -1,4 +1,3 @@
-// src/lib/tiendanube/client.ts
 const USER_ID = process.env.TIENDANUBE_USER_ID!;
 const ACCESS_TOKEN = process.env.TIENDANUBE_ACCESS_TOKEN!;
 const API_URL = process.env.TIENDANUBE_API_URL!;

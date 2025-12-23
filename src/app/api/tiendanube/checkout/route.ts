@@ -1,4 +1,3 @@
-// src/app/api/tiendanube/checkout/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { tiendanubeApi } from '@/lib/tiendanube/client';
 

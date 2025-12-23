@@ -1,7 +1,6 @@
 import { tiendanubeApi } from '@/lib/tiendanube/client';
 import { TiendanubeProduct, Category } from '@/lib/tiendanube/types';
 import ProductGrid from '@/app/components/product/ProductGrid';
-import { useTranslations } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/navigation';

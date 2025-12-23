@@ -1,4 +1,3 @@
-// src/app/[locale]/productos/page.tsx
 import { tiendanubeApi } from '@/lib/tiendanube/client';
 import { TiendanubeProduct } from '@/lib/tiendanube/types';
 import ProductGrid from '@/app/components/product/ProductGrid';
