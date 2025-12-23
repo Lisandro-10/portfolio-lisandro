@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { Menu, Moon, Sun, X, Globe } from "lucide-react";
-import { useTheme } from "@/src/app/hooks/useTheme";
+import { useTheme } from "@/app/hooks/useTheme";
 import { useTranslations, useLocale } from "next-intl";
-import { Link, usePathname, useRouter } from "@/src/i18n/navigation";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);

@@ -168,5 +168,30 @@
   "LanguageSwitcher": {
     "es": "Español",
     "en": "English"
+  },
+  "Ecommerce": {
+    "products": "Products",
+    "categories": "Categories",
+    "cart": "Cart",
+    "addToCart": "Add to cart",
+    "outOfStock": "Out of stock",
+    "price": "Price",
+    "compareAt": "Before",
+    "freeShipping": "Free shipping",
+    "quantity": "Quantity",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "checkout": "Finalize purchase",
+    "emptyCart": "Your cart is empty",
+    "continueShopping": "Continue shopping",
+    "viewProduct": "View product",
+    "backToProducts": "Back to products",
+    "loadMore": "Load more",
+    "filter": "Filter",
+    "sortBy": "Sort by",
+    "priceAsc": "Price: lowest to highest",
+    "priceDesc": "Price: highest to lowest",
+    "newest": "Newest",
+    "featured": "Featured"
   }
 }
