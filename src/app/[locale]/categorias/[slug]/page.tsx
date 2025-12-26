@@ -1,5 +1,4 @@
-import { tiendanubeApiSafe } from '@/lib/tiendanube/client';
-import { TiendanubeProduct, Category } from '@/lib/tiendanube/types';
+import { products, categories } from '@/lib/tiendanube';
 import ProductGrid from '@/app/components/product/ProductGrid';
 import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -12,53 +11,34 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  try {
-    const categories = await tiendanubeApiSafe<Category[]>(
-      '/categories',
-      { revalidate: 300 }
-    );
-    
-    if (!categories) {
-      console.warn('generateStaticParams: Could not fetch categories, returning empty params');
-      return [];
-    }
-    
-    const paths: { locale: string; slug: string }[] = [];
-    
-    categories.forEach((category) => {
-      if (category.handle.es) {
-        paths.push({ locale: 'es', slug: category.handle.es });
-      }
-      if (category.handle.en) {
-        paths.push({ locale: 'en', slug: category.handle.en });
-      }
-    });
-    
-    return paths;
-  } catch (error) {
-    console.error('generateStaticParams error:', error);
+  const { data } = await categories.getAll({ revalidate: 300 });
+  
+  if (!data) {
+    console.warn('generateStaticParams: Could not fetch categories');
     return [];
   }
+  
+  const paths: { locale: string; slug: string }[] = [];
+  
+  data.forEach((category) => {
+    if (category.handle.es) {
+      paths.push({ locale: 'es', slug: category.handle.es });
+    }
+    if (category.handle.en) {
+      paths.push({ locale: 'en', slug: category.handle.en });
+    }
+  });
+  
+  return paths;
 }
 
 export async function generateMetadata({ params }: Props) {
   const { locale, slug } = await params;
   
-  const categories = await tiendanubeApiSafe<Category[]>(
-    '/categories',
-    { revalidate: 60 }
-  );
+  const { data: category } = await categories.findBySlug(slug, locale);
   
-  if (!categories) {
-    return { title: 'Categoría' };
-  }
-  
-  const category = categories.find(
-    cat => cat.handle[locale as 'es' | 'en'] === slug || cat.handle.es === slug
-  );
-
   if (!category) {
-    return { title: 'Categoría no encontrada' };
+    return { title: 'Categoría' };
   }
 
   const name = category.name[locale as 'es' | 'en'] || category.name.es;
@@ -75,14 +55,11 @@ export default async function CategoriaPage({ params, searchParams }: Props) {
   
   setRequestLocale(locale);
 
-  // Fetch categories
-  const categories = await tiendanubeApiSafe<Category[]>(
-    '/categories',
-    { revalidate: 60 }
-  );
+  // Fetch category
+  const { data: category, error: categoryError } = await categories.findBySlug(slug, locale);
   
   // API Error
-  if (!categories) {
+  if (categoryError) {
     return (
       <main className="pt-14 sm:pt-16">
         <section className="section-container">
@@ -102,24 +79,19 @@ export default async function CategoriaPage({ params, searchParams }: Props) {
       </main>
     );
   }
-  
-  // Find category by slug
-  const category = categories.find(
-    cat => cat.handle[locale as 'es' | 'en'] === slug || cat.handle.es === slug
-  );
 
   if (!category) notFound();
 
-  // Fetch products for this category
-  const products = await tiendanubeApiSafe<TiendanubeProduct[]>(
-    `/products?category_id=${category.id}&page=${page}&per_page=12&published=true`,
-    { tags: ['products', `category-${category.id}`], revalidate: 60 }
-  );
-
   const categoryName = category.name[locale as 'es' | 'en'] || category.name.es;
 
+  // Fetch products for this category
+  const { data: productList, error: productsError } = await products.getAll(
+    { page: parseInt(page), perPage: 12, categoryId: category.id },
+    { tags: ['products', `category-${category.id}`] }
+  );
+
   // Products fetch error
-  if (!products) {
+  if (productsError) {
     return (
       <main className="pt-14 sm:pt-16">
         <section className="section-container">
@@ -148,6 +120,8 @@ export default async function CategoriaPage({ params, searchParams }: Props) {
     );
   }
 
+  const productData = productList || [];
+
   return (
     <main className="pt-14 sm:pt-16">
       <section className="section-container">
@@ -169,13 +143,13 @@ export default async function CategoriaPage({ params, searchParams }: Props) {
             {categoryName}
           </h1>
           <p className="text-sm sm:text-base text-gray-300">
-            {products.length} {products.length === 1 ? 'producto' : 'productos'}
+            {productData.length} {productData.length === 1 ? 'producto' : 'productos'}
           </p>
         </div>
 
         {/* Grid de productos */}
-        {products.length > 0 ? (
-          <ProductGrid products={products} locale={locale} />
+        {productData.length > 0 ? (
+          <ProductGrid products={productData} locale={locale} />
         ) : (
           <div className="text-center py-12">
             <p className="text-gray-400 mb-4">
@@ -188,7 +162,7 @@ export default async function CategoriaPage({ params, searchParams }: Props) {
         )}
 
         {/* Paginación */}
-        {products.length === 12 && (
+        {productData.length === 12 && (
           <div className="flex justify-center mt-8 sm:mt-12 gap-4">
             {parseInt(page) > 1 && (
               <Link

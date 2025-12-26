@@ -1,5 +1,4 @@
-import { tiendanubeApiSafe } from '@/lib/tiendanube/client';
-import { TiendanubeProduct } from '@/lib/tiendanube/types';
+import { products } from '@/lib/tiendanube';
 import { notFound } from 'next/navigation';
 import ProductDetail from '@/app/components/product/ProductDetail';
 import { setRequestLocale } from 'next-intl/server';
@@ -11,50 +10,39 @@ interface Props {
   params: Promise<{ locale: string; slug: string }>;
 }
 
-// Safe static params - returns empty array if API fails
+// Static params para SSG
 export async function generateStaticParams() {
-  try {
-    const products = await tiendanubeApiSafe<TiendanubeProduct[]>(
-      '/products?per_page=100&published=true',
-      { revalidate: 300 } // Cache for 5 minutes during build
-    );
-    
-    if (!products) {
-      console.warn('generateStaticParams: Could not fetch products, returning empty params');
-      return [];
-    }
-    
-    const paths: { locale: string; slug: string }[] = [];
-    
-    products.forEach((product) => {
-      if (product.handle.es) {
-        paths.push({ locale: 'es', slug: product.handle.es });
-      }
-      if (product.handle.en) {
-        paths.push({ locale: 'en', slug: product.handle.en });
-      }
-    });
-    
-    return paths;
-  } catch (error) {
-    console.error('generateStaticParams error:', error);
+  const { data } = await products.getAllForSitemap();
+  
+  if (!data) {
+    console.warn('generateStaticParams: Could not fetch products');
     return [];
   }
+  
+  const paths: { locale: string; slug: string }[] = [];
+  
+  data.forEach((product) => {
+    if (product.handle.es) {
+      paths.push({ locale: 'es', slug: product.handle.es });
+    }
+    if (product.handle.en) {
+      paths.push({ locale: 'en', slug: product.handle.en });
+    }
+  });
+  
+  return paths;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   
-  const products = await tiendanubeApiSafe<TiendanubeProduct[]>(
-    `/products?handle=${slug}`,
-    { revalidate: 60 }
-  );
+  const { data } = await products.getBySlug(slug);
   
-  if (!products || products.length === 0) {
+  if (!data || data.length === 0) {
     return { title: 'Producto no encontrado' };
   }
 
-  const product = products[0];
+  const product = data[0];
   const name = product.name[locale as 'es' | 'en'] || product.name.es;
   const description = product.description[locale as 'es' | 'en'] || product.description.es;
 
@@ -71,13 +59,12 @@ export default async function ProductoPage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  const products = await tiendanubeApiSafe<TiendanubeProduct[]>(
-    `/products?handle=${slug}`,
-    { tags: ['products', `product-${slug}`], revalidate: 60 }
-  );
+  const { data, error } = await products.getBySlug(slug, {
+    tags: ['products', `product-${slug}`],
+  });
 
   // API Error
-  if (products === null) {
+  if (error) {
     return (
       <main className="pt-14 sm:pt-16">
         <section className="section-container">
@@ -99,11 +86,11 @@ export default async function ProductoPage({ params }: Props) {
   }
 
   // Product not found
-  if (products.length === 0) {
+  if (!data || data.length === 0) {
     notFound();
   }
 
-  const product = products[0];
+  const product = data[0];
 
   return (
     <main className="pt-14 sm:pt-16">

@@ -1,11 +1,10 @@
 import { MetadataRoute } from 'next';
-import { tiendanubeApiSafe } from '@/lib/tiendanube/client';
-import { TiendanubeProduct } from '@/lib/tiendanube/types';
+import { products } from '@/lib/tiendanube';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://tu-dominio.com';
   
-  // Base routes that always exist
+  // Static routes
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}/es`,
@@ -33,20 +32,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Try to fetch products, but don't fail if API is unavailable
-  const products = await tiendanubeApiSafe<TiendanubeProduct[]>(
-    '/products?per_page=100&published=true',
-    { revalidate: 300 }
-  );
+  // Fetch products
+  const { data } = await products.getAllForSitemap();
 
-  if (!products) {
+  if (!data) {
     console.warn('Sitemap: Could not fetch products, returning static routes only');
     return staticRoutes;
   }
 
   const productUrls: MetadataRoute.Sitemap = [];
   
-  products.forEach((product) => {
+  data.forEach((product) => {
     if (product.handle.es) {
       productUrls.push({
         url: `${baseUrl}/es/productos/${product.handle.es}`,

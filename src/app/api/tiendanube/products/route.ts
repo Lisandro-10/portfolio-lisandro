@@ -1,30 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { tiendanubeApi } from '@/lib/tiendanube/client';
-import { TiendanubeProduct } from '@/lib/tiendanube/types';
+import { products } from '@/lib/tiendanube';
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
-  const page = searchParams.get('page') || '1';
-  const perPage = searchParams.get('per_page') || '12';
+  const page = parseInt(searchParams.get('page') || '1');
+  const perPage = parseInt(searchParams.get('per_page') || '12');
   const categoryId = searchParams.get('category_id');
 
-  let endpoint = `/products?page=${page}&per_page=${perPage}&published=true`;
-  
-  if (categoryId) {
-    endpoint += `&category_id=${categoryId}`;
-  }
+  const { data, error } = await products.getAll({
+    page,
+    perPage,
+    categoryId: categoryId ? parseInt(categoryId) : undefined,
+  });
 
-  try {
-    const products = await tiendanubeApi<TiendanubeProduct[]>(endpoint, {
-      cache: 'force-cache',
-      tags: ['products'],
-    });
-
-    return NextResponse.json(products);
-  } catch (error) {
+  if (error) {
     return NextResponse.json(
-      { error: 'Error fetching products' },
-      { status: 500 }
+      { error: error.message },
+      { status: error.status || 500 }
     );
   }
+
+  return NextResponse.json(data);
 }

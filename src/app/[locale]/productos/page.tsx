@@ -1,5 +1,4 @@
-import { tiendanubeApiSafe } from '@/lib/tiendanube/client';
-import { TiendanubeProduct } from '@/lib/tiendanube/types';
+import { products } from '@/lib/tiendanube';
 import ProductGrid from '@/app/components/product/ProductGrid';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
@@ -17,13 +16,13 @@ export default async function ProductosPage({ params, searchParams }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations('Ecommerce');
 
-  const products = await tiendanubeApiSafe<TiendanubeProduct[]>(
-    `/products?page=${page}&per_page=12&published=true`,
-    { tags: ['products'], revalidate: 60 } // ISR: revalidate every 60 seconds
-  );
+  const { data, error } = await products.getAll({
+    page: parseInt(page),
+    perPage: 12,
+  });
 
-  // Error state - API failed
-  if (!products) {
+  // Error state
+  if (error) {
     return (
       <main className="pt-14 sm:pt-16">
         <section className="section-container">
@@ -45,7 +44,7 @@ export default async function ProductosPage({ params, searchParams }: Props) {
   }
 
   // Empty state
-  if (products.length === 0) {
+  if (!data || data.length === 0) {
     return (
       <main className="pt-14 sm:pt-16">
         <section className="section-container">
@@ -69,7 +68,7 @@ export default async function ProductosPage({ params, searchParams }: Props) {
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-center">
           {t('products')}
         </h1>
-        <ProductGrid products={products} locale={locale} />
+        <ProductGrid products={data} locale={locale} />
       </section>
     </main>
   );
