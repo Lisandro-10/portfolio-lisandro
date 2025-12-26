@@ -193,6 +193,13 @@
     "priceAsc": "Precio: menor a mayor",
     "priceDesc": "Precio: mayor a menor",
     "newest": "Más recientes",
-    "featured": "Destacados"
+    "featured": "Destacados",
+    "selectVariant": "Selecciona una opción",
+    "available": "disponibles",
+    "onlyLeft": "¡Solo quedan {count}!",
+    "brand": "Marca",
+    "maxReached": "Máximo alcanzado",
+    "noStock": "Sin stock",
+    "inStock": "En stock"
   }
 }

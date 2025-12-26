@@ -8,7 +8,7 @@ interface ProductImage {
   id: number;
   src: string;
   position: number;
-  alt: any[]; // Array vacío en API real
+  alt: string[];
 }
 
 interface Props {
@@ -37,7 +37,7 @@ export default function ProductGallery({ images, productName }: Props) {
 
   return (
     <div className="space-y-3 sm:space-y-4">
-      {/* Imagen Principal */}
+      {/* Main image */}
       <div className="relative w-full aspect-square bg-dark-lighter rounded-lg overflow-hidden group">
         <Image
           src={images[selectedImage].src}
@@ -48,10 +48,10 @@ export default function ProductGallery({ images, productName }: Props) {
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
         />
 
-        {/* Navegación (solo si hay múltiples imágenes) */}
+        {/* Navigation (only if multiple images) */}
         {images.length > 1 && (
           <>
-            {/* Botones de navegación - visible en mobile */}
+            {/* Nav buttons - visible on mobile */}
             <button
               onClick={handlePrevious}
               className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-dark/80 backdrop-blur-sm rounded-full text-white hover:bg-dark transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100"
@@ -67,7 +67,7 @@ export default function ProductGallery({ images, productName }: Props) {
               <ChevronRight size={20} />
             </button>
 
-            {/* Indicadores de posición */}
+            {/* Position indicators */}
             <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
               {images.map((_, index) => (
                 <button
@@ -86,7 +86,7 @@ export default function ProductGallery({ images, productName }: Props) {
         )}
       </div>
 
-      {/* Thumbnails - solo si hay múltiples imágenes */}
+      {/* Thumbnails - only if multiple images */}
       {images.length > 1 && (
         <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-4 gap-2 sm:gap-3">
           {images.map((image, index) => (

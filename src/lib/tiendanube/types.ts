@@ -3,7 +3,7 @@ export interface TiendanubeProduct {
   name: LocalizedField;
   description: LocalizedField;
   handle: LocalizedField;
-  attributes: any[];
+  attributes: LocalizedField[];
   published: boolean;
   free_shipping: boolean;
   requires_shipping: boolean;
@@ -41,7 +41,7 @@ export interface ProductVariant {
   height: string;
   depth: string;
   sku: string | null;
-  values: any[]; // Vacío en la respuesta real
+  values: LocalizedField[]; // Vacío en la respuesta real
   barcode: string | null;
   mpn: string | null;
   age_group: string | null;

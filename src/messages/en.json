@@ -182,7 +182,7 @@
     "quantity": "Quantity",
     "total": "Total",
     "subtotal": "Subtotal",
-    "checkout": "Finalize purchase",
+    "checkout": "Checkout",
     "emptyCart": "Your cart is empty",
     "continueShopping": "Continue shopping",
     "viewProduct": "View product",
@@ -190,9 +190,16 @@
     "loadMore": "Load more",
     "filter": "Filter",
     "sortBy": "Sort by",
-    "priceAsc": "Price: lowest to highest",
-    "priceDesc": "Price: highest to lowest",
+    "priceAsc": "Price: low to high",
+    "priceDesc": "Price: high to low",
     "newest": "Newest",
-    "featured": "Featured"
+    "featured": "Featured",
+    "selectVariant": "Select an option",
+    "available": "available",
+    "onlyLeft": "Only {count} left!",
+    "brand": "Brand",
+    "maxReached": "Maximum reached",
+    "noStock": "Out of stock",
+    "inStock": "In stock"
   }
 }

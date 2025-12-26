@@ -12,6 +12,7 @@ interface Props {
   price: number;
   image: string;
   stock: number | null;
+  variantOptions?: string;
 }
 
 export default function AddToCartButton({ 
@@ -20,14 +21,15 @@ export default function AddToCartButton({
   name,
   price,
   image,
-  stock 
+  stock,
+  variantOptions
 }: Props) {
   const t = useTranslations('Ecommerce');
-  const addItem = useCartStore((state: any) => state.addItem);
-  const items = useCartStore((state: any) => state.items);
+  const addItem = useCartStore((state) => state.addItem);
+  const items = useCartStore((state) => state.items);
   const [isAdding, setIsAdding] = useState(false);
   
-  const currentInCart = items.find((i: any) => i.variantId === variantId)?.quantity || 0;
+  const currentInCart = items.find((i) => i.variantId === variantId)?.quantity || 0;
   const isOutOfStock = stock !== null && stock <= 0;
   const reachedLimit = stock !== null && currentInCart >= stock;
 
@@ -35,7 +37,14 @@ export default function AddToCartButton({
     if (isOutOfStock || reachedLimit) return;
     
     setIsAdding(true);
-    addItem({ productId, variantId, name, price, image });
+    addItem({ 
+      productId, 
+      variantId, 
+      name, 
+      price, 
+      image,
+      variantOptions 
+    });
     
     setTimeout(() => setIsAdding(false), 300);
   };
@@ -51,8 +60,8 @@ export default function AddToCartButton({
         {isOutOfStock 
           ? t('outOfStock')
           : reachedLimit 
-          ? 'Máximo alcanzado'
-          : t('addToCart')}
+            ? t('maxReached')
+            : t('addToCart')}
       </span>
     </button>
   );
