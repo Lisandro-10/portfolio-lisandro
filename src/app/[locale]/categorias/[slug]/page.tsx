@@ -13,7 +13,10 @@ interface Props {
 
 export async function generateStaticParams() {
   try {
-    const categories = await tiendanubeApiSafe<Category[]>('/categories');
+    const categories = await tiendanubeApiSafe<Category[]>(
+      '/categories',
+      { revalidate: 300 }
+    );
     
     if (!categories) {
       console.warn('generateStaticParams: Could not fetch categories, returning empty params');
@@ -41,7 +44,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props) {
   const { locale, slug } = await params;
   
-  const categories = await tiendanubeApiSafe<Category[]>('/categories');
+  const categories = await tiendanubeApiSafe<Category[]>(
+    '/categories',
+    { revalidate: 60 }
+  );
   
   if (!categories) {
     return { title: 'Categoría' };
@@ -70,7 +76,10 @@ export default async function CategoriaPage({ params, searchParams }: Props) {
   setRequestLocale(locale);
 
   // Fetch categories
-  const categories = await tiendanubeApiSafe<Category[]>('/categories');
+  const categories = await tiendanubeApiSafe<Category[]>(
+    '/categories',
+    { revalidate: 60 }
+  );
   
   // API Error
   if (!categories) {
@@ -104,7 +113,7 @@ export default async function CategoriaPage({ params, searchParams }: Props) {
   // Fetch products for this category
   const products = await tiendanubeApiSafe<TiendanubeProduct[]>(
     `/products?category_id=${category.id}&page=${page}&per_page=12&published=true`,
-    { cache: 'force-cache', tags: ['products', `category-${category.id}`] }
+    { tags: ['products', `category-${category.id}`], revalidate: 60 }
   );
 
   const categoryName = category.name[locale as 'es' | 'en'] || category.name.es;

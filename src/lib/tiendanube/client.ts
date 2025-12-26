@@ -7,6 +7,7 @@ interface FetchOptions {
   body?: unknown;
   cache?: RequestCache;
   tags?: string[];
+  revalidate?: number;
 }
 
 export class TiendanubeError extends Error {
@@ -38,7 +39,7 @@ export async function tiendanubeApi<T>(
     );
   }
 
-  const { method = 'GET', body, cache = 'no-store', tags } = options;
+  const { method = 'GET', body, cache = 'force-cache', tags, revalidate } = options;
 
   try {
     const response = await fetch(`${API_URL}/${STORE_ID}${endpoint}`, {
@@ -50,7 +51,10 @@ export async function tiendanubeApi<T>(
       },
       body: body ? JSON.stringify(body) : undefined,
       cache,
-      next: tags ? { tags } : undefined,
+      next: {
+        ...(tags && { tags }),
+        ...(revalidate && { revalidate }),
+      },
     });
 
     if (!response.ok) {

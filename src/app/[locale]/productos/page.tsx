@@ -19,7 +19,7 @@ export default async function ProductosPage({ params, searchParams }: Props) {
 
   const products = await tiendanubeApiSafe<TiendanubeProduct[]>(
     `/products?page=${page}&per_page=12&published=true`,
-    { cache: 'force-cache', tags: ['products'] }
+    { tags: ['products'], revalidate: 60 } // ISR: revalidate every 60 seconds
   );
 
   // Error state - API failed

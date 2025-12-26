@@ -15,7 +15,8 @@ interface Props {
 export async function generateStaticParams() {
   try {
     const products = await tiendanubeApiSafe<TiendanubeProduct[]>(
-      '/products?per_page=100&published=true'
+      '/products?per_page=100&published=true',
+      { revalidate: 300 } // Cache for 5 minutes during build
     );
     
     if (!products) {
@@ -45,7 +46,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   
   const products = await tiendanubeApiSafe<TiendanubeProduct[]>(
-    `/products?handle=${slug}`
+    `/products?handle=${slug}`,
+    { revalidate: 60 }
   );
   
   if (!products || products.length === 0) {
@@ -71,7 +73,7 @@ export default async function ProductoPage({ params }: Props) {
 
   const products = await tiendanubeApiSafe<TiendanubeProduct[]>(
     `/products?handle=${slug}`,
-    { tags: ['products', `product-${slug}`] }
+    { tags: ['products', `product-${slug}`], revalidate: 60 }
   );
 
   // API Error

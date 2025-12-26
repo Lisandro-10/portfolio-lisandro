@@ -35,7 +35,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Try to fetch products, but don't fail if API is unavailable
   const products = await tiendanubeApiSafe<TiendanubeProduct[]>(
-    '/products?per_page=100&published=true'
+    '/products?per_page=100&published=true',
+    { revalidate: 300 }
   );
 
   if (!products) {
