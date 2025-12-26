@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, Moon, Sun, X, Globe } from "lucide-react";
+import { Menu, Moon, Sun, X, Globe, ShoppingBag } from "lucide-react";
 import { useTheme } from "@/app/hooks/useTheme";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
@@ -46,6 +46,7 @@ export default function Navbar() {
     { name: t("services"), href: "/servicios" },
     { name: t("about"), href: "/#sobre-mi" },
     { name: t("contact"), href: "/#contacto" },
+    { name: t("products"), href: "/productos" },
   ];
 
   return (
@@ -79,6 +80,9 @@ export default function Navbar() {
                   {item.name}
                 </Link>
               ))}
+              <Link href="/carrito" className="text-sm lg:text-base text-gray-300 hover:text-white transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">
+                <ShoppingBag className="w-4 h-4" />
+              </Link>
 
               {/* Language Switcher - Desktop */}
               <div className="relative">
