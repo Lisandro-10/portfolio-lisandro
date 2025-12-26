@@ -8,14 +8,15 @@ interface ProductImage {
   id: number;
   src: string;
   position: number;
-  alt: string[];
+  alt: any[]; // Array vacío en API real
 }
 
 interface Props {
   images: ProductImage[];
+  productName: string;
 }
 
-export default function ProductGallery({ images }: Props) {
+export default function ProductGallery({ images, productName }: Props) {
   const [selectedImage, setSelectedImage] = useState(0);
 
   if (!images || images.length === 0) {
@@ -40,7 +41,7 @@ export default function ProductGallery({ images }: Props) {
       <div className="relative w-full aspect-square bg-dark-lighter rounded-lg overflow-hidden group">
         <Image
           src={images[selectedImage].src}
-          alt={images[selectedImage].alt[0] || 'Product image'}
+          alt={productName}
           fill
           className="object-cover"
           priority
@@ -100,7 +101,7 @@ export default function ProductGallery({ images }: Props) {
             >
               <Image
                 src={image.src}
-                alt={image.alt[0] || `Thumbnail ${index + 1}`}
+                alt={`${productName} - vista ${index + 1}`}
                 fill
                 className="object-cover"
                 sizes="(max-width: 640px) 25vw, (max-width: 768px) 20vw, 15vw"

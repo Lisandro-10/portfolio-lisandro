@@ -15,7 +15,6 @@ export async function generateStaticParams() {
     '/products?per_page=100&published=true'
   );
   
-  // Generar rutas para ambos idiomas
   const paths: { locale: string; slug: string }[] = [];
   
   products.forEach((product) => {
@@ -58,7 +57,6 @@ export default async function ProductoPage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  // Buscar por handle (slug)
   const products = await tiendanubeApi<TiendanubeProduct[]>(
     `/products?handle=${slug}`,
     { tags: ['products', `product-${slug}`] }
@@ -68,7 +66,12 @@ export default async function ProductoPage({ params }: Props) {
   if (!product) notFound();
 
   const mainVariant = product.variants[0];
-  const price = parseFloat(mainVariant.price);
+  
+  // Usar promotional_price si existe, sino usar price
+  const displayPrice = mainVariant.promotional_price 
+    ? parseFloat(mainVariant.promotional_price)
+    : parseFloat(mainVariant.price);
+  
   const comparePrice = mainVariant.compare_at_price 
     ? parseFloat(mainVariant.compare_at_price) 
     : null;
@@ -76,12 +79,18 @@ export default async function ProductoPage({ params }: Props) {
   const name = product.name[locale as 'es' | 'en'] || product.name.es;
   const description = product.description[locale as 'es' | 'en'] || product.description.es;
 
+  // Calcular descuento si existe promotional_price
+  const hasDiscount = mainVariant.promotional_price && comparePrice;
+  const discountPercent = hasDiscount 
+    ? Math.round(((comparePrice - displayPrice) / comparePrice) * 100)
+    : 0;
+
   return (
     <main className="pt-14 sm:pt-16">
       <section className="section-container">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
           {/* Galería de imágenes */}
-          <ProductGallery images={product.images} />
+          <ProductGallery images={product.images} productName={name} />
 
           {/* Info del producto */}
           <div className="space-y-4 sm:space-y-6">
@@ -89,14 +98,22 @@ export default async function ProductoPage({ params }: Props) {
               {name}
             </h1>
 
-            <div className="flex items-baseline gap-3">
-              <span className="text-2xl sm:text-3xl font-bold text-primary">
-                ${price.toLocaleString('es-AR')}
-              </span>
-              {comparePrice && (
-                <span className="text-lg text-gray-400 line-through">
-                  ${comparePrice.toLocaleString('es-AR')}
+            <div className="space-y-2">
+              <div className="flex items-baseline gap-3">
+                <span className="text-2xl sm:text-3xl font-bold text-primary">
+                  ${displayPrice.toLocaleString('es-AR')}
                 </span>
+                {comparePrice && comparePrice !== displayPrice && (
+                  <span className="text-lg text-gray-400 line-through">
+                    ${comparePrice.toLocaleString('es-AR')}
+                  </span>
+                )}
+              </div>
+              
+              {hasDiscount && (
+                <div className="inline-block bg-red-500/10 text-red-500 text-sm font-semibold px-3 py-1 rounded-full">
+                  ¡Ahorrás {discountPercent}%!
+                </div>
               )}
             </div>
 
@@ -115,10 +132,20 @@ export default async function ProductoPage({ params }: Props) {
               productId={product.id}
               variantId={mainVariant.id}
               name={name}
-              price={price}
+              price={displayPrice}
               image={product.images[0]?.src || ''}
               stock={mainVariant.stock}
             />
+
+            {/* Info adicional */}
+            <div className="border-t border-dark-lighter pt-4 space-y-2 text-sm text-gray-400">
+              {mainVariant.stock !== null && (
+                <p>Stock disponible: {mainVariant.stock} unidades</p>
+              )}
+              {mainVariant.sku && (
+                <p>SKU: {mainVariant.sku}</p>
+              )}
+            </div>
           </div>
         </div>
       </section>
