@@ -8,6 +8,3 @@ export * from './types';
 export { products, type GetProductsParams, type ProductsOptions } from './products';
 export { categories, type CategoriesOptions } from './categories';
 export { cart, type CheckoutItem, type CartResponse } from './cart';
-
-// Legacy (deprecated)
-export { tiendanubeApi, tiendanubeApiSafe } from './client';

@@ -1,5 +1,4 @@
 // Tiendanube API Client
-// Capa abstracta para llamadas a la API de Tiendanube
 
 const STORE_ID = process.env.TIENDANUBE_STORE_ID;
 const ACCESS_TOKEN = process.env.TIENDANUBE_ACCESS_TOKEN;
@@ -164,45 +163,3 @@ export const api = {
   del: <T>(endpoint: string, options?: FetchOptions) => 
     request<T>(endpoint, 'DELETE', options),
 };
-
-// ============================================
-// Legacy wrappers (para compatibilidad)
-// TODO: Migrar componentes y eliminar
-// ============================================
-
-/** @deprecated Use api.get/post/put/del instead */
-export async function tiendanubeApi<T>(
-  endpoint: string,
-  options: {
-    method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
-    body?: unknown;
-    cache?: RequestCache;
-    tags?: string[];
-    revalidate?: number;
-  } = {}
-): Promise<T> {
-  const { method = 'GET', body, ...rest } = options;
-  const result = await request<T>(endpoint, method, { ...rest, body });
-  
-  if (result.error) {
-    throw result.error;
-  }
-  
-  return result.data as T;
-}
-
-/** @deprecated Use api.get/post/put/del instead */
-export async function tiendanubeApiSafe<T>(
-  endpoint: string,
-  options: {
-    method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
-    body?: unknown;
-    cache?: RequestCache;
-    tags?: string[];
-    revalidate?: number;
-  } = {}
-): Promise<T | null> {
-  const { method = 'GET', body, ...rest } = options;
-  const result = await request<T>(endpoint, method, { ...rest, body });
-  return result.data;
-}
