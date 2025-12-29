@@ -14,6 +14,10 @@
     --filter-hover-text: theme('colors.text.dark.primary');    /* #ffffff */
     --filter-selected-bg: theme('colors.filter.selected.dark');/* #1e3a8a - blue-900 */
     --filter-selected-text: theme('colors.primary.DEFAULT');   /* #3B82F6 */
+    
+    /* Navbar buttons */
+    --navbar-button-hover-bg: theme('colors.dark.lighter');    /* #334155 */
+    --navbar-button-hover-text: theme('colors.primary.DEFAULT');/* #3B82F6 */
   }
   
   html.light {
@@ -22,6 +26,10 @@
     --filter-hover-text: theme('colors.text.light.primary');    /* #0F172A */
     --filter-selected-bg: theme('colors.filter.selected.light');/* #dbeafe - blue-100 */
     --filter-selected-text: theme('colors.primary.DEFAULT');    /* #3B82F6 */
+    
+    /* Navbar buttons en light theme */
+    --navbar-button-hover-bg: theme('colors.light.secondary'); /* #f1f5f9 - slate-100 */
+    --navbar-button-hover-text: theme('colors.primary.DEFAULT');/* #3B82F6 */
   }
 }
 
@@ -82,16 +90,18 @@
       @apply px-3 py-1 text-sm;
     }
   }
-   
+
   .filter-option {
     @apply w-full flex items-center gap-3 px-2 py-2 rounded-lg text-sm transition-colors;
   }
-    
+  
+  /* Hover state usando variables CSS que referencian la paleta de Tailwind */
   .filter-option:not(.selected):hover {
     background-color: var(--filter-hover-bg);
     color: var(--filter-hover-text);
   }
   
+  /* Selected state */
   .filter-option.selected {
     background-color: var(--filter-selected-bg);
     color: var(--filter-selected-text);
@@ -164,7 +174,10 @@ html.light .project-card:hover {
   @apply border-primary shadow-lg shadow-primary/10;
 }
 
-/* Navbar en Light Theme */
+/* ============================================ */
+/* NAVBAR - Light Theme */
+/* ============================================ */
+
 html.light nav {
   background-color: rgba(255, 255, 255, 0.95) !important;
 }
@@ -178,11 +191,6 @@ html.light nav.scrolled {
   background-color: rgba(255, 255, 255, 0.98) !important;
 }
 
-html.light nav a:not(.logo),
-html.light nav button:not(.theme-toggle) {
-  @apply text-text-light-secondary;
-}
-
 html.light nav a:not(.logo):hover {
   @apply text-primary;
 }
@@ -191,16 +199,46 @@ html.light nav .logo {
   @apply text-primary;
 }
 
-/* Theme toggle button en light */
+/* Theme toggle button */
 html.light .theme-toggle {
   @apply text-text-light-secondary;
 }
 
-html.light .theme-toggle:hover {
-  @apply text-primary bg-light-secondary;
+html.light nav button[aria-label="Toggle theme"] {
+  @apply text-text-light-secondary;
 }
 
-/* Mobile Menu en Light Theme */
+html.light nav button[aria-label="Toggle theme"]:hover {
+  background-color: var(--navbar-button-hover-bg) !important;
+  color: var(--navbar-button-hover-text) !important;
+}
+
+
+/* Language switcher button */
+html.light nav button[aria-label="Change language"] {
+  @apply text-text-light-secondary;
+}
+
+html.light nav button[aria-label="Change language"]:hover {
+  background-color: var(--navbar-button-hover-bg) !important;
+  color: var(--navbar-button-hover-text) !important;
+}
+
+/* Language dropdown menu */
+html.light nav button[aria-label="Change language"] + div {
+  @apply bg-light border-border-light;
+}
+
+/* Language dropdown items */
+html.light nav button[aria-label="Change language"] + div button {
+  @apply text-text-light-secondary;
+}
+
+html.light nav button[aria-label="Change language"] + div button:hover {
+  background-color: var(--navbar-button-hover-bg) !important;
+  color: var(--navbar-button-hover-text) !important;
+}
+
 html.light .bg-dark-darker\/75 {
   background-color: rgba(255, 255, 255, 0.95);
 }
@@ -213,7 +251,6 @@ html.light .bg-dark-darker\/75 a:hover {
   @apply text-primary bg-light-secondary/50;
 }
 
-/* Input fields en light theme */
 html.light input,
 html.light textarea {
   @apply bg-light border-border-light text-text-light-primary;
