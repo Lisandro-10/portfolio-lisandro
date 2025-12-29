@@ -1,24 +1,23 @@
 import { products } from '@/lib/tiendanube';
-import ProductGrid from '@/app/components/product/ProductGrid';
+import ProductsPageClient from '@/app/components/product/ProductsPageClient';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { AlertCircle } from 'lucide-react';
 
 interface Props {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ page?: string; categoria?: string }>;
 }
 
-export default async function ProductosPage({ params, searchParams }: Props) {
+export default async function ProductosPage({ params }: Props) {
   const { locale } = await params;
-  const { page = '1' } = await searchParams;
   
   setRequestLocale(locale);
   const t = await getTranslations('Ecommerce');
 
+  // Fetch all products (filtering happens client-side)
   const { data, error } = await products.getAll({
-    page: parseInt(page),
-    perPage: 12,
+    page: 1,
+    perPage: 100, // Get all for client-side filtering
   });
 
   // Error state
@@ -65,10 +64,10 @@ export default async function ProductosPage({ params, searchParams }: Props) {
   return (
     <main className="pt-14 sm:pt-16">
       <section className="section-container">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-center">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-center md:text-left">
           {t('products')}
         </h1>
-        <ProductGrid products={data} locale={locale} />
+        <ProductsPageClient products={data} locale={locale} />
       </section>
     </main>
   );

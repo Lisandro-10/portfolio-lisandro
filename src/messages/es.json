@@ -200,6 +200,15 @@
     "brand": "Marca",
     "maxReached": "Máximo alcanzado",
     "noStock": "Sin stock",
-    "inStock": "En stock"
+    "inStock": "En stock",
+    "search": "Buscar productos...",
+    "priceRange": "Rango de precio",
+    "minPrice": "Mínimo",
+    "maxPrice": "Máximo",
+    "clearFilters": "Limpiar filtros",
+    "resultsCount": "{count} productos",
+    "noResults": "No se encontraron productos",
+    "noResultsHint": "Intenta ajustar los filtros o buscar otro término",
+    "filters": "Filtros"
   }
 }
