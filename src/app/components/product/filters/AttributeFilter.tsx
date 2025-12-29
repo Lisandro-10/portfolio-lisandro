@@ -68,11 +68,7 @@ export default function AttributeFilter({
               <button
                 key={option}
                 onClick={() => toggleAttributeValue(name, option)}
-                className={`w-full flex items-center gap-3 px-2 py-2 rounded-lg text-sm transition-colors
-                           ${isSelected 
-                             ? 'bg-primary/10 text-primary' 
-                             : 'text-gray-300 hover:bg-dark hover:text-white'
-                           }`}
+                className={`filter-option ${isSelected ? 'selected' : ''}`}
               >
                 {/* Checkbox visual */}
                 <span className={`w-4 h-4 rounded border flex items-center justify-center flex-shrink-0
