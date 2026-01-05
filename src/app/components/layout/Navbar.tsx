@@ -6,8 +6,6 @@ import { useTheme } from "@/app/hooks/useTheme";
 import { useHydration } from "@/app/hooks/useHydration";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
-import { useCartStore } from "@/stores/cart-store";
-import CartDrawer from "../cart/CartDrawer";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,9 +21,7 @@ export default function Navbar() {
   
   // Cart store con hydration check
   const hydrated = useHydration();
-  const totalItems = useCartStore((state) => state.totalItems());
   const [prevTotal, setPrevTotal] = useState(0);
-  const [animateBadge, setAnimateBadge] = useState(false);
 
   // Scroll handler
   useEffect(() => {
@@ -48,16 +44,6 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
-  // Badge animation when cart changes
-  useEffect(() => {
-    if (hydrated && totalItems !== prevTotal && totalItems > 0) {
-      setAnimateBadge(true);
-      const timer = setTimeout(() => setAnimateBadge(false), 500);
-      setPrevTotal(totalItems);
-      return () => clearTimeout(timer);
-    }
-  }, [totalItems, prevTotal, hydrated]);
-
   const handleLanguageChange = (newLocale: string) => {
     router.replace(pathname, { locale: newLocale });
     setLangMenuOpen(false);
@@ -68,7 +54,6 @@ export default function Navbar() {
     { name: t("services"), href: "/servicios" },
     { name: t("about"), href: "/#sobre-mi" },
     { name: t("contact"), href: "/#contacto" },
-    { name: t("products"), href: "/productos" },
   ];
 
   return (
@@ -102,24 +87,6 @@ export default function Navbar() {
                   {item.name}
                 </Link>
               ))}
-              
-              {/* Cart Button - Desktop */}
-              <button
-                onClick={() => setCartDrawerOpen(true)}
-                className="relative p-2 text-gray-300 hover:text-white transition-colors duration-200"
-                aria-label="Open cart"
-              >
-                <ShoppingBag className="w-5 h-5" />
-                {hydrated && totalItems > 0 && (
-                  <span 
-                    className={`absolute -top-1 -right-1 w-5 h-5 bg-primary text-dark text-xs font-bold 
-                               rounded-full flex items-center justify-center transition-transform
-                               ${animateBadge ? 'scale-125' : 'scale-100'}`}
-                  >
-                    {totalItems}
-                  </span>
-                )}
-              </button>
 
               {/* Language Switcher - Desktop */}
               <div className="relative">
@@ -164,23 +131,6 @@ export default function Navbar() {
 
             {/* Mobile Controls */}
             <div className="md:hidden flex items-center gap-2">
-              {/* Cart Button - Mobile */}
-              <button
-                onClick={() => setCartDrawerOpen(true)}
-                className="relative p-2 text-white hover:text-primary transition-colors rounded-lg hover:bg-dark-lighter"
-                aria-label="Open cart"
-              >
-                <ShoppingBag size={20} />
-                {hydrated && totalItems > 0 && (
-                  <span 
-                    className={`absolute -top-1 -right-1 w-5 h-5 bg-primary text-dark text-xs font-bold 
-                               rounded-full flex items-center justify-center transition-transform
-                               ${animateBadge ? 'scale-125' : 'scale-100'}`}
-                  >
-                    {totalItems}
-                  </span>
-                )}
-              </button>
 
               {/* Language Switcher - Mobile */}
               <div className="relative">
@@ -250,12 +200,6 @@ export default function Navbar() {
           </div>
         </div>
       )}
-
-      {/* Cart Drawer */}
-      <CartDrawer 
-        isOpen={cartDrawerOpen} 
-        onClose={() => setCartDrawerOpen(false)} 
-      />
     </>
   );
 }
