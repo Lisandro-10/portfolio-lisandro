@@ -1,4 +1,3 @@
-// src/stores/cart-store.ts
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -10,13 +9,14 @@ export interface CartItem {
   quantity: number;
   image: string;
   variantOptions?: string;
+  stock: number;
 }
 
 interface CartStore {
   items: CartItem[];
   addItem: (item: Omit<CartItem, 'quantity'>) => void;
   removeItem: (variantId: number) => void;
-  updateQuantity: (variantId: number, quantity: number) => void;
+  updateQuantity: (variantId: number, quantity: number, stock: number) => void;
   clearCart: () => void;
   totalItems: () => number;
   totalPrice: () => number;
@@ -51,14 +51,16 @@ export const useCartStore = create<CartStore>()(
         }));
       },
 
-      updateQuantity: (variantId, quantity) => {
-        if (quantity <= 0) {
+      updateQuantity: (variantId, quantity, stock) => {
+        const nextQuantity = Math.min(quantity, stock);
+
+        if (nextQuantity <= 0) {
           get().removeItem(variantId);
           return;
         }
         set((state) => ({
           items: state.items.map(i =>
-            i.variantId === variantId ? { ...i, quantity } : i
+            i.variantId === variantId ? { ...i, quantity: nextQuantity } : i
           ),
         }));
       },

@@ -10,6 +10,7 @@ interface Props {
 
 export default function CartItem({ item }: Props) {
   const { updateQuantity, removeItem } = useCartStore();
+  const reachedLimit = item.stock !== null && item.quantity >= item.stock;
 
   return (
     <div className="flex gap-3 sm:gap-4 bg-dark-lighter p-3 sm:p-4 rounded-lg">
@@ -50,7 +51,7 @@ export default function CartItem({ item }: Props) {
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 bg-dark border border-dark-lighter rounded-lg">
             <button
-              onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
+              onClick={() => updateQuantity(item.variantId, item.quantity - 1, item.stock)}
               className="p-2 hover:bg-dark-lighter transition-colors rounded-l-lg"
               aria-label="Reducir cantidad"
             >
@@ -60,8 +61,9 @@ export default function CartItem({ item }: Props) {
               {item.quantity}
             </span>
             <button
-              onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
-              className="p-2 hover:bg-dark-lighter transition-colors rounded-r-lg"
+              onClick={() => updateQuantity(item.variantId, item.quantity + 1, item.stock)}
+              disabled={reachedLimit}
+              className="p-2 hover:bg-dark-lighter transition-colors rounded-r-lg disabled:opacity-50 disabled:cursor-not-allowed"
               aria-label="Aumentar cantidad"
             >
               <Plus size={14} />

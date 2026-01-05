@@ -11,7 +11,7 @@ interface Props {
   name: string;
   price: number;
   image: string;
-  stock: number | null;
+  stock: number;
   variantOptions?: string;
 }
 
@@ -43,6 +43,7 @@ export default function AddToCartButton({
       name, 
       price, 
       image,
+      stock,
       variantOptions 
     });
     

@@ -82,7 +82,6 @@ export default function CarritoPage() {
           {t('cart')}
         </h1>
 
-        {/* Error message */}
         {error && (
           <div className="mb-4 p-4 bg-red-500/10 border border-red-500/30 rounded-lg flex items-start gap-3">
             <AlertCircle size={20} className="text-red-500 flex-shrink-0 mt-0.5" />
@@ -94,14 +93,12 @@ export default function CarritoPage() {
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-          {/* Lista de items */}
           <div className="lg:col-span-2 space-y-3 sm:space-y-4">
             {items.map((item) => (
               <CartItem key={item.variantId} item={item} />
             ))}
           </div>
 
-          {/* Resumen - Sticky en desktop */}
           <div className="lg:sticky lg:top-20 h-fit">
             <div className="bg-dark-lighter p-4 sm:p-6 rounded-lg border border-dark-lighter">
               <h2 className="text-lg sm:text-xl font-bold mb-4">

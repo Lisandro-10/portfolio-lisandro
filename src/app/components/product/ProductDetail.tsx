@@ -23,7 +23,6 @@ export default function ProductDetail({ product, locale }: Props) {
     setSelectedVariant(variant);
   }, []);
 
-  // Build variant options string for cart display (e.g., "Celeste/Blanco - M")
   const variantOptions = useMemo(() => {
     if (!selectedVariant.values || selectedVariant.values.length === 0) {
       return undefined;
@@ -34,7 +33,6 @@ export default function ProductDetail({ product, locale }: Props) {
       .join(' - ');
   }, [selectedVariant, locale]);
 
-  // Price display
   const displayPrice = selectedVariant.promotional_price 
     ? parseFloat(selectedVariant.promotional_price)
     : parseFloat(selectedVariant.price);
@@ -48,22 +46,18 @@ export default function ProductDetail({ product, locale }: Props) {
     ? Math.round(((comparePrice - displayPrice) / comparePrice) * 100)
     : 0;
 
-  // Localized content
   const name = product.name[locale as 'es' | 'en'] || product.name.es;
   const description = product.description[locale as 'es' | 'en'] || product.description.es;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
-      {/* Gallery */}
       <ProductGallery images={product.images} productName={name} />
 
-      {/* Product info */}
       <div className="space-y-4 sm:space-y-6">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">
           {name}
         </h1>
 
-        {/* Price */}
         <div className="space-y-2">
           <div className="flex items-baseline gap-3">
             <span className="text-2xl sm:text-3xl font-bold text-primary">
@@ -89,31 +83,27 @@ export default function ProductDetail({ product, locale }: Props) {
           </div>
         )}
 
-        {/* Variant selector */}
         <VariantSelector 
           product={product}
           locale={locale}
           onVariantChange={handleVariantChange}
         />
 
-        {/* Description */}
         <div 
           className="text-sm sm:text-base text-gray-300 prose prose-invert max-w-none"
           dangerouslySetInnerHTML={{ __html: description }}
         />
 
-        {/* Add to cart */}
         <AddToCartButton 
           productId={product.id}
           variantId={selectedVariant.id}
           name={name}
           price={displayPrice}
           image={product.images[0]?.src || ''}
-          stock={selectedVariant.stock}
+          stock={selectedVariant.stock ?? 0}
           variantOptions={variantOptions}
         />
 
-        {/* Additional info */}
         <div className="border-t border-dark-lighter pt-4 space-y-2 text-sm text-gray-400">
           {selectedVariant.sku && (
             <p>SKU: {selectedVariant.sku}</p>
