@@ -21,7 +21,7 @@
     "title": "My Projects",
     "subtitle": "A selection of projects demonstrating my experience with different technologies and solutions.",
     "viewProject": "View Project",
-    "demo": "Demo",
+    "demo": "Source Code",
     "items": {
       "lostilos": {
         "title": "Club Management System",
@@ -34,6 +34,10 @@
       "estudioandia": {
         "title": "Estudio Andia Web Development",
         "description": "Simple static website built with HTML, CSS, and JavaScript."
+      },
+      "ando-presskit": {
+        "title": "Ando Press Kit",
+        "description": "Web development for ANDO, a Progressive House DJ group from Mendoza, Argentina."
       }
     }
   },

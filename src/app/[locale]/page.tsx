@@ -70,18 +70,18 @@ export default function Home() {
         {/* Hero Section */}
         <section className="min-h-[calc(100vh-3.5rem)] sm:min-h-[calc(100vh-4rem)] flex items-center section-container">
           <div className="w-full">
-            <div className="flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-8 md:gap-12">
-              <div className="flex-1 text-center md:text-left">
+            <div className="flex flex-col-reverse md:flex-row md:items-center  gap-8 md:gap-12">
+              <div className="flex-1 text-center">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-3 sm:mb-4">
                   {t("Hero.name")}
                 </h1>
                 <h2 className="text-xl sm:text-2xl md:text-3xl text-primary mb-4 sm:mb-6">
                   {t("Hero.role")}
                 </h2>
-                <p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mb-6 sm:mb-8 mx-auto md:mx-0">
+                <p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mb-6 sm:mb-8 mx-auto">
                   {t("Hero.description")}
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                   <a href="#proyectos" className="btn-primary w-full sm:w-auto text-center">
                     {t("Hero.viewProjects")}
                   </a>
@@ -94,7 +94,7 @@ export default function Home() {
               <div className="flex-shrink-0 mx-auto md:mx-0">
                 <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-2xl overflow-hidden border-4 border-primary/20">
                   <Image
-                    src="/profile.JPEG"
+                    src="/profile-about.jpg"
                     alt="Lisandro Andia"
                     fill
                     className="object-cover"
@@ -125,7 +125,7 @@ export default function Home() {
                   image={project.image}
                   tags={project.tags}
                   liveUrl={project.liveUrl}
-                  githubUrl={project.githubUrl}
+                  githubUrl={project.githubUrl || ""}
                 />
               ))}
             </div>

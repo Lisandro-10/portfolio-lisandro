@@ -8,7 +8,7 @@ interface ProjectCardProps {
   image: string;
   tags: string[];
   liveUrl?: string;
-  githubUrl?: string;
+  githubUrl: string;
 }
 
 export default function ProjectCard({

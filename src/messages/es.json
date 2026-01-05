@@ -21,7 +21,7 @@
     "title": "Mis Proyectos",
     "subtitle": "Una selección de proyectos que demuestran mi experiencia en diferentes tecnologías y soluciones.",
     "viewProject": "Ver Proyecto",
-    "demo": "Demo",
+    "demo": "Código fuente",
     "items": {
       "lostilos": {
         "title": "Sistema de Gestión de Socios",
@@ -34,6 +34,10 @@
       "estudioandia": {
         "title": "Desarrollo Web Estudio Andia",
         "description": "Desarrollo de sitio web completo para Estudio Andia con diseño moderno y optimizado para SEO."
+      },
+      "ando-presskit": {
+        "title": "Ando Press Kit",
+        "description": "Desarrollo web para ANDO, grupo de DJ de Mendoza, Argentina."
       }
     }
   },
