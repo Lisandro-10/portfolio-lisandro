@@ -1,12 +1,12 @@
 "use client";
 
-import ProjectCard from "../components/ProjectCard";
+import ProjectCard from "../components/landing/ProjectCard";
 import Image from "next/image";
 import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { projects } from "@/data-projects/projects";
-import { experiences } from "@/data-projects/experiences";
+import { projects } from "@/data/projects";
+import { experiences } from "@/data/experiences";
 
 export default function Home() {
   const t = useTranslations();

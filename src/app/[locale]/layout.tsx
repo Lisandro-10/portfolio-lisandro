@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Navbar from "../components/Navbar";
-import { Footer } from "../components/Footer";
+import Navbar from "../components/layout/Navbar";
+import { Footer } from "../components/layout/Footer";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
@@ -44,8 +44,10 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <Navbar />
-      {children}
-      <Footer />
+      <div className="flex-1">
+        {children}
+      </div>
+        <Footer />
     </NextIntlClientProvider>
   );
 }

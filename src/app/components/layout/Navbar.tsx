@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, Moon, Sun, X, Globe } from "lucide-react";
+import { Menu, Moon, Sun, X, Globe, ShoppingBag } from "lucide-react";
 import { useTheme } from "@/app/hooks/useTheme";
+import { useHydration } from "@/app/hooks/useHydration";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 
@@ -10,13 +11,19 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [langMenuOpen, setLangMenuOpen] = useState(false);
+  const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const t = useTranslations("Navbar");
   const tLang = useTranslations("LanguageSwitcher");
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
+  
+  // Cart store con hydration check
+  const hydrated = useHydration();
+  const [prevTotal, setPrevTotal] = useState(0);
 
+  // Scroll handler
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -25,6 +32,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Body scroll lock for mobile menu
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -123,6 +131,7 @@ export default function Navbar() {
 
             {/* Mobile Controls */}
             <div className="md:hidden flex items-center gap-2">
+
               {/* Language Switcher - Mobile */}
               <div className="relative">
                 <button
