@@ -16,3 +16,11 @@ export {
   type TiendanubeOrder,
   type CreateOrderOptions 
 } from './orders';
+export {
+  cart,
+  type CartProduct,
+  type CartCustomer,
+  type CartShippingAddress,
+  type DraftOrderResponse,
+  type CreateCartOptions,
+} from './cart';

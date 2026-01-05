@@ -34,24 +34,6 @@ export default function CarritoPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           products: orderProducts,
-          // Información del cliente (opcional - se usarán valores por defecto)
-          // customer: {
-          //   name: 'Nombre del Cliente',
-          //   email: 'cliente@email.com',
-          //   phone: '1234567890',
-          // },
-          // address: {
-          //   first_name: 'Nombre',
-          //   last_name: 'Apellido',
-          //   address: 'Calle',
-          //   number: '123',
-          //   locality: 'Localidad',
-          //   city: 'Ciudad',
-          //   province: 'Provincia',
-          //   zipcode: '5500',
-          //   country: 'AR',
-          //   phone: '1234567890',
-          // },
         }),
       });
 
@@ -61,18 +43,11 @@ export default function CarritoPage() {
         throw new Error(data.error || 'Error al crear la orden');
       }
 
-      // Si hay URL de pago, redirigir
-      if (data.paymentUrl) {
-        // Limpiar carrito antes de redirigir
-        clearCart();
-        window.location.href = data.paymentUrl;
-      } else {
-        // Si no hay URL de pago, mostrar confirmación
-        clearCart();
-        // Podrías redirigir a una página de éxito
-        alert(`Orden #${data.orderNumber} creada exitosamente!`);
-        router.push('/productos');
-      }
+      // Orden creada exitosamente
+      clearCart();
+      // Redirigir a página de éxito con el número de orden
+      router.push(`/checkout/success?order=${data.orderNumber}`);
+      
     } catch (err) {
       console.error('Checkout error:', err);
       setError(err instanceof Error ? err.message : 'Error al procesar la compra');
@@ -143,7 +118,7 @@ export default function CarritoPage() {
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-300">Envío</span>
                   <span className="text-gray-400 text-xs">
-                    Calculado en checkout
+                    A coordinar
                   </span>
                 </div>
               </div>
@@ -160,9 +135,13 @@ export default function CarritoPage() {
                 disabled={isLoading}
                 className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span>{isLoading ? 'Procesando...' : t('checkout')}</span>
+                <span>{isLoading ? 'Procesando...' : 'Confirmar pedido'}</span>
                 {!isLoading && <ArrowRight size={18} />}
               </button>
+
+              <p className="text-xs text-gray-400 text-center mt-3">
+                Te contactaremos para coordinar el pago y envío
+              </p>
 
               <button
                 onClick={() => router.push('/productos')}
