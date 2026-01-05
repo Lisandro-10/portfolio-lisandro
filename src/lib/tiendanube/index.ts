@@ -7,4 +7,12 @@ export * from './types';
 // Services
 export { products, type GetProductsParams, type ProductsOptions } from './products';
 export { categories, type CategoriesOptions } from './categories';
-export { cart, type CheckoutItem, type CartResponse } from './cart';
+export { 
+  orders, 
+  type OrderProduct, 
+  type OrderCustomer, 
+  type OrderAddress, 
+  type CreateOrderPayload,
+  type TiendanubeOrder,
+  type CreateOrderOptions 
+} from './orders';

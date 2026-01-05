@@ -5,37 +5,77 @@ import { useRouter } from '@/i18n/navigation';
 import { useState } from 'react';
 import CartItem from '@/app/components/cart/CartItem';
 import { useTranslations } from 'next-intl';
-import { ShoppingBag, ArrowRight } from 'lucide-react';
+import { ShoppingBag, ArrowRight, AlertCircle } from 'lucide-react';
 
 export default function CarritoPage() {
   const t = useTranslations('Ecommerce');
   const { items, totalPrice, clearCart } = useCartStore();
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   const handleCheckout = async () => {
     if (items.length === 0) return;
     
     setIsLoading(true);
+    setError(null);
     
     try {
-      const response = await fetch('/api/tiendanube/checkout', {
+      // Transformar items del carrito al formato de OrderProduct
+      const orderProducts = items.map((item) => ({
+        variant_id: item.variantId,
+        quantity: item.quantity,
+        price: item.price.toFixed(2),
+        name: item.name,
+      }));
+
+      const response = await fetch('/api/tiendanube/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          items: items.map((item: any) => ({
-            variant_id: item.variantId,
-            quantity: item.quantity,
-          })),
+          products: orderProducts,
+          // Información del cliente (opcional - se usarán valores por defecto)
+          // customer: {
+          //   name: 'Nombre del Cliente',
+          //   email: 'cliente@email.com',
+          //   phone: '1234567890',
+          // },
+          // address: {
+          //   first_name: 'Nombre',
+          //   last_name: 'Apellido',
+          //   address: 'Calle',
+          //   number: '123',
+          //   locality: 'Localidad',
+          //   city: 'Ciudad',
+          //   province: 'Provincia',
+          //   zipcode: '5500',
+          //   country: 'AR',
+          //   phone: '1234567890',
+          // },
         }),
       });
 
-      const { checkoutUrl } = await response.json();
-      
-      // Redirigir al checkout de Tiendanube
-      window.location.href = checkoutUrl;
-    } catch (error) {
-      console.error('Checkout error:', error);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Error al crear la orden');
+      }
+
+      // Si hay URL de pago, redirigir
+      if (data.paymentUrl) {
+        // Limpiar carrito antes de redirigir
+        clearCart();
+        window.location.href = data.paymentUrl;
+      } else {
+        // Si no hay URL de pago, mostrar confirmación
+        clearCart();
+        // Podrías redirigir a una página de éxito
+        alert(`Orden #${data.orderNumber} creada exitosamente!`);
+        router.push('/productos');
+      }
+    } catch (err) {
+      console.error('Checkout error:', err);
+      setError(err instanceof Error ? err.message : 'Error al procesar la compra');
     } finally {
       setIsLoading(false);
     }
@@ -67,10 +107,21 @@ export default function CarritoPage() {
           {t('cart')}
         </h1>
 
+        {/* Error message */}
+        {error && (
+          <div className="mb-4 p-4 bg-red-500/10 border border-red-500/30 rounded-lg flex items-start gap-3">
+            <AlertCircle size={20} className="text-red-500 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-red-500 font-medium">Error</p>
+              <p className="text-sm text-red-400">{error}</p>
+            </div>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {/* Lista de items */}
           <div className="lg:col-span-2 space-y-3 sm:space-y-4">
-            {items.map((item: any) => (
+            {items.map((item) => (
               <CartItem key={item.variantId} item={item} />
             ))}
           </div>
@@ -107,7 +158,7 @@ export default function CarritoPage() {
               <button
                 onClick={handleCheckout}
                 disabled={isLoading}
-                className="btn-primary w-full flex items-center justify-center gap-2"
+                className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span>{isLoading ? 'Procesando...' : t('checkout')}</span>
                 {!isLoading && <ArrowRight size={18} />}
@@ -116,6 +167,7 @@ export default function CarritoPage() {
               <button
                 onClick={() => router.push('/productos')}
                 className="btn-secondary w-full mt-3"
+                disabled={isLoading}
               >
                 {t('continueShopping')}
               </button>
