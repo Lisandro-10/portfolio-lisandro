@@ -3,22 +3,16 @@ import { useTranslations } from "next-intl";
 
 interface PricingCardProps {
   title: string;
-  price: string;
   description: string;
   features: string[];
-  deliveryTime: string;
   isRecommended?: boolean;
-  note?: string;
 }
 
 export default function PricingCard({
   title,
-  price,
   description,
   features,
-  deliveryTime,
   isRecommended = false,
-  note,
 }: PricingCardProps) {
   const t = useTranslations("Services");
 
@@ -62,30 +56,6 @@ export default function PricingCard({
             ))}
           </ul>
         </div>
-
-        <div className="text-center mb-4">
-          <p className="text-xs sm:text-sm text-gray-400">
-            {t("delivery")}{" "}
-            <span className="text-white font-medium">{deliveryTime}</span>
-          </p>
-        </div>
-
-        {note && (
-          <p className="text-xs text-gray-500 text-center mb-4 italic">
-            {note}
-          </p>
-        )}
-
-        {/* <a
-          href="#contacto-servicios"
-          className={`w-full py-2.5 sm:py-3 text-sm sm:text-base font-semibold rounded-lg text-center transition-all duration-300 ${
-            isRecommended
-              ? "bg-primary text-dark hover:bg-primary/90"
-              : "border-2 border-primary text-primary hover:bg-primary hover:text-dark"
-          }`}
-        >
-          {t("requestQuote")}
-        </a> */}
       </div>
     </div>
   );

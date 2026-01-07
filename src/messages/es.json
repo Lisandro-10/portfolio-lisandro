@@ -12,7 +12,7 @@
   },
   "Hero": {
     "name": "Lisandro Andia",
-    "role": "Ingeniero en Sistemas | Desarrollador Full Stack",
+    "role": "Ingeniero en Sistemas de Información | Desarrollador Full Stack",
     "description": "Especializado en crear experiencias web modernas y escalables. Con experiencia en el ciclo de vida completo del desarrollo de software.",
     "viewProjects": "Ver Proyectos",
     "contactMe": "Contactar"
@@ -23,6 +23,10 @@
     "viewProject": "Ver Proyecto",
     "demo": "Código fuente",
     "items": {
+      "ecommerce": {
+        "title": "Solución E-commerce",
+        "description": "Una web application que ofrece una solución completa para e-commerce con integración de MercadoPago y Tiendanube."
+      },
       "lostilos": {
         "title": "Sistema de Gestión de Socios",
         "description": "Una aplicación web completa para gestionar socios con autenticación, categorización y seguimiento."
@@ -72,6 +76,7 @@
       "serviceLanding": "Landing Page",
       "serviceProfessional": "Web Profesional",
       "serviceEcommerce": "E-commerce",
+      "serviceCustom": "Solución Personalizada",
       "message": "Mensaje",
       "messagePlaceholder": "Cuéntame sobre tu proyecto...",
       "submit": "Enviar Mensaje",
@@ -80,7 +85,6 @@
       "required": "*"
     },
     "findMe": "Encuéntrame en:",
-    "socialMedia": "Redes Sociales:",
     "location": "Mendoza, Argentina"
   },
   "Footer": {
@@ -99,7 +103,6 @@
   "Services": {
     "heroTitle": "Planes de Desarrollo Web",
     "heroSubtitle": "Soluciones adaptadas a tus necesidades. Desde una landing page hasta una tienda online completa.",
-    "recommended": "⭐ Recomendado",
     "delivery": "Entrega:",
     "requestQuote": "Solicitar Cotización",
     "faqTitle": "Preguntas Frecuentes",
@@ -110,10 +113,9 @@
     "plans": {
       "landing": {
         "title": "Landing Esencial",
-        "price": "$199",
         "description": "Presencia web rápida y efectiva",
-        "deliveryTime": "2-3 semanas",
         "features": [
+          "Construído con plataformas como wordpress",
           "Landing page de 1-3 secciones",
           "Diseño basado en templates modernos",
           "100% responsive (móvil y desktop)",
@@ -123,9 +125,7 @@
       },
       "professional": {
         "title": "Web Profesional",
-        "price": "$299",
         "description": "Solución completa y escalable",
-        "deliveryTime": "3-4 semanas",
         "features": [
           "SPA completa desarrollada con Next.js",
           "5-7 secciones personalizadas",
@@ -139,19 +139,23 @@
       },
       "ecommerce": {
         "title": "Solución E-commerce",
-        "price": "$999",
         "description": "Vende online desde el día uno",
-        "deliveryTime": "10-12 semanas",
-        "note": "Requiere suscripción a la plataforma e-commerce",
         "features": [
           "Todo lo del Plan Profesional",
-          "Integración completa con Tiendanube/Shopify",
+          "Integración completa con Tiendanube",
           "Catálogo de productos personalizado",
           "Carrito de compras funcional",
           "Checkout integrado",
           "Panel de administración",
           "3 rondas de revisión",
           "3 meses de mantenimiento incluido"
+        ]
+      },
+      "customSolution": {
+        "title": "Solución Personalizada",
+        "description": "Solución adaptada a tus necesidades",
+        "features": [
+          "Discutamos tus necesidades y creemos una solución que cumpla con tus requisitos"
         ]
       }
     },

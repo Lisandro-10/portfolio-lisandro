@@ -1,9 +1,16 @@
 export const projects = [
   {
+    key: "ecommerce",
+    image: "/projects/ecommerce.png",
+    tags: ["Next.js", "API MercadoPago", "Tiendanube"],
+    liveUrl: "https://main.d3btlvczyugl3y.amplifyapp.com",
+    githubUrl: "https://github.com/Lisandro-10/portal-lassenware",
+  },
+  {
     key: "lostilos",
     image: "/projects/lostilos.JPEG",
     tags: ["Next.js", "Java", "PostgreSQL", "Spring Boot"],
-    liveUrl: "#",
+    liveUrl: null,
     githubUrl: null,
   },
   {

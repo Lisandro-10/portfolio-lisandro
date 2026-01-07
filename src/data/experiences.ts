@@ -6,6 +6,6 @@ export const experiences = [
   },
   {
     key: "certant",
-    tags: ["Java", "Spring Boot", "Angular", "AngularJS", "jQuery", "SQL Server"],
+    tags: ["Java", "Spring Boot", "Angular", "AngularJS", "jQuery", "SQL Server", "Jenkins"],
   },
 ];

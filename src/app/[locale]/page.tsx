@@ -4,6 +4,8 @@ import ProjectCard from "../components/landing/ProjectCard";
 import Image from "next/image";
 import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { useState } from "react";
+import { useTheme } from "@/app/hooks/useTheme";
+import { useHydration } from "@/app/hooks/useHydration";
 import { useTranslations } from "next-intl";
 import { projects } from "@/data/projects";
 import { experiences } from "@/data/experiences";
@@ -13,6 +15,8 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { theme } = useTheme();
+  const hydrated = useHydration();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,6 +30,7 @@ export default function Home() {
       landing: t("Services.plans.landing.title"),
       professional: t("Services.plans.professional.title"),
       ecommerce: t("Services.plans.ecommerce.title"),
+      customSolution: t("Services.plans.customSolution.title"),
     };
 
     const subject = serviceValue 
@@ -92,12 +97,18 @@ export default function Home() {
               </div>
 
               <div className="flex-shrink-0 mx-auto md:mx-0">
-                <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-2xl overflow-hidden border-4 border-primary/20">
+                <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-[450px] xl:h-[450px] 2xl:w-[500px] 2xl:h-[500px]">
                   <Image
-                    src="/profile-about.jpg"
+                    src={
+                      hydrated
+                        ? theme === "light"
+                          ? "/logo-la-black.png"
+                          : "/logo-la-white.png"
+                        : "/logo-la-white.png"
+                    }
                     alt="Lisandro Andia"
                     fill
-                    className="object-cover"
+                    className="object-cover rounded-3xl"
                     priority
                   />
                 </div>
@@ -124,7 +135,7 @@ export default function Home() {
                   description={t(`Projects.items.${project.key}.description`)}
                   image={project.image}
                   tags={project.tags}
-                  liveUrl={project.liveUrl}
+                  liveUrl={project.liveUrl || ""}
                   githubUrl={project.githubUrl || ""}
                 />
               ))}
@@ -195,7 +206,7 @@ export default function Home() {
         </section>
 
         {/* Contact Section */}
-        <section id="contacto" className="section-container bg-dark-lighter/50">
+        <section id="contacto" className="section-container bg-dark-lighter/50 mb-10">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 text-center">
               {t("Contact.title")}
@@ -246,6 +257,7 @@ export default function Home() {
                       <option value="landing">{t("Contact.form.serviceLanding")}</option>
                       <option value="professional">{t("Contact.form.serviceProfessional")}</option>
                       <option value="ecommerce">{t("Contact.form.serviceEcommerce")}</option>
+                      <option value="customSolution">{t("Contact.form.serviceCustom")}</option>
                     </select>
                   </div>
                   <div>
@@ -298,9 +310,6 @@ export default function Home() {
                 </div>
 
                 <div>
-                  <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">
-                    {t("Contact.socialMedia")}
-                  </h3>
                   <div className="flex gap-4">
                     <a
                       href="https://github.com/lisandro-10"

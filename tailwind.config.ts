@@ -22,7 +22,7 @@ const config: Config = {
           dark: "#EA580C",
         },
         dark: {
-          DEFAULT: "#1E293B",
+          DEFAULT: "#000",
           lighter: "#334155",
           darker: "#0F172A",
         },

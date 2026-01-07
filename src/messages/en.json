@@ -23,6 +23,10 @@
     "viewProject": "View Project",
     "demo": "Source Code",
     "items": {
+      "ecommerce": {
+        "title": "E-commerce Solution",
+        "description": "A web application which offers a complete solution for e-commerce with MercadoPago integration and Tiendanube."
+      },
       "lostilos": {
         "title": "Club Management System",
         "description": "A web application to manage partners with authentication, categorization, and tracking."
@@ -71,7 +75,8 @@
       "servicePlaceholder": "Select a service",
       "serviceLanding": "Landing Page", 
       "serviceProfessional": "Professional Web", 
-      "serviceEcommerce": "E-commerce", 
+      "serviceEcommerce": "E-commerce",
+      "serviceCustom": "Custom Solution", 
       "message": "Message",
       "messagePlaceholder": "Tell me about your project...",
       "submit": "Send Message",
@@ -80,7 +85,6 @@
       "required": "*"
     },
     "findMe": "Find me at:",
-    "socialMedia": "Social Media:",
     "location": "Mendoza, Argentina"
   },
   "Footer": {
@@ -99,7 +103,6 @@
   "Services": {
     "heroTitle": "Web Development Plans",
     "heroSubtitle": "Solutions tailored to your needs. From a landing page to a complete online store.",
-    "recommended": "⭐ Recommended",
     "delivery": "Delivery:",
     "requestQuote": "Request Quote",
     "faqTitle": "Frequently Asked Questions",
@@ -110,10 +113,9 @@
     "plans": {
       "landing": {
         "title": "Essential Landing",
-        "price": "$199",
         "description": "Quick and effective web presence",
-        "deliveryTime": "2-3 weeks",
         "features": [
+          "Build with platforms like wordpress",
           "Landing page with 1-3 sections",
           "Design based on modern templates",
           "100% responsive (mobile and desktop)",
@@ -123,12 +125,9 @@
       },
       "professional": {
         "title": "Professional Web",
-        "price": "$299",
         "description": "Complete and scalable solution",
-        "deliveryTime": "3-4 weeks",
         "features": [
           "Complete SPA developed with Next.js",
-          "5-7 customized sections",
           "Unique design adapted to your brand",
           "SEO optimized (meta tags, sitemap, performance)",
           "Smooth animations and transitions",
@@ -139,19 +138,23 @@
       },
       "ecommerce": {
         "title": "E-commerce Solution",
-        "price": "$999",
         "description": "Sell online from day one",
-        "deliveryTime": "10-12 weeks",
-        "note": "Requires e-commerce platform subscription",
         "features": [
           "Everything in the Professional Plan",
-          "Complete integration with Tiendanube/Shopify",
+          "Complete integration with Tiendanube",
           "Custom product catalog",
           "Functional shopping cart",
           "Integrated checkout",
           "Admin panel",
           "3 revision rounds",
           "3 months of maintenance included"
+        ]
+      },
+      "customSolution": {
+        "title": "Custom Solution",
+        "description": "Solution tailored to your needs",
+        "features": [
+          "Let's discuss your needs and create a solution that meets your requirements"
         ]
       }
     },

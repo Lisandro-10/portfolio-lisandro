@@ -10,9 +10,9 @@ export default function Servicios() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const plans = [
-    { key: "landing", isRecommended: false },
-    { key: "professional", isRecommended: true },
-    { key: "ecommerce", isRecommended: false },
+    { key: "landing" },
+    { key: "professional" },
+    { key: "ecommerce" },
   ];
 
   const faqKeys = ["revision", "maintenance", "additional"];
@@ -32,21 +32,25 @@ export default function Servicios() {
 
         {/* Pricing Cards Section */}
         <section className="section-container bg-dark-lighter/50">
-          <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col items-center max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
               {plans.map((plan) => (
                 <PricingCard
                   key={plan.key}
                   title={t(`plans.${plan.key}.title`)}
-                  price={t(`plans.${plan.key}.price`)}
                   description={t(`plans.${plan.key}.description`)}
                   features={t.raw(`plans.${plan.key}.features`) as string[]}
-                  deliveryTime={t(`plans.${plan.key}.deliveryTime`)}
-                  isRecommended={plan.isRecommended}
-                  note={plan.key === "ecommerce" ? t(`plans.${plan.key}.note`) : undefined}
                 />
               ))}
             </div>
+            <div className="mt-6 lg:w-1/2 ">
+              <PricingCard
+                title={t("plans.customSolution.title")}
+                description={t("plans.customSolution.description")}
+                features={t.raw("plans.customSolution.features") as string[]}
+              />
+            </div>
+
           </div>
         </section>
 
@@ -104,7 +108,7 @@ export default function Servicios() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6 sm:mb-8">
               <a
-                href="mailto:lisandroandia14@gmail.com"
+                href="/#contacto"
                 className="btn-primary w-full sm:w-auto flex items-center justify-center gap-2"
               >
                 <Mail size={18} />

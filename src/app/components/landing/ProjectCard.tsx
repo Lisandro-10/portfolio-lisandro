@@ -36,7 +36,7 @@ export default function ProjectCard({
         <h3 className="text-lg sm:text-xl font-bold mb-2 text-white group-hover:text-primary transition-colors">
           {title}
         </h3>
-        <p className="text-sm sm:text-base text-gray-300 mb-4 line-clamp-3">
+        <p className="text-sm sm:text-base text-gray-300 mb-4">
           {description}
         </p>
 
