@@ -226,7 +226,7 @@ export default function Home() {
                       name="name"
                       type="text"
                       id="name"
-                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark border border-dark-lighter rounded-lg focus:outline-none focus:border-primary text-sm sm:text-base transition-colors"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark-darker border border-dark-lighter rounded-lg focus:outline-none focus:border-primary text-sm sm:text-base transition-colors"
                       placeholder={t("Contact.form.namePlaceholder")}
                       required
                     />
@@ -239,7 +239,7 @@ export default function Home() {
                       name="email"
                       type="email"
                       id="email"
-                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark border border-dark-lighter rounded-lg focus:outline-none focus:border-primary text-sm sm:text-base transition-colors"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark-darker border border-dark-lighter rounded-lg focus:outline-none focus:border-primary text-sm sm:text-base transition-colors"
                       placeholder={t("Contact.form.emailPlaceholder")}
                       required
                     />
@@ -251,7 +251,7 @@ export default function Home() {
                     <select 
                       name="service" 
                       id="service" 
-                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark border border-dark-lighter rounded-lg focus:outline-none focus:border-primary text-sm sm:text-base transition-colors appearance-none cursor-pointer"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark-darker border border-dark-lighter rounded-lg focus:outline-none focus:border-primary text-sm sm:text-base transition-colors appearance-none cursor-pointer"
                     >
                       <option value="">{t("Contact.form.servicePlaceholder")}</option>
                       <option value="landing">{t("Contact.form.serviceLanding")}</option>
@@ -268,7 +268,7 @@ export default function Home() {
                       name="message"
                       id="message"
                       rows={4}
-                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark border border-dark-lighter rounded-lg focus:outline-none focus:border-primary resize-none text-sm sm:text-base transition-colors"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark-darker border border-dark-lighter rounded-lg focus:outline-none focus:border-primary resize-none text-sm sm:text-base transition-colors"
                       placeholder={t("Contact.form.messagePlaceholder")}
                       required
                     ></textarea>
