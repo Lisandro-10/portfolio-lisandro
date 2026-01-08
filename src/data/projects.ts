@@ -8,7 +8,7 @@ export const projects = [
   },
   {
     key: "lostilos",
-    image: "/projects/lostilos.JPEG",
+    image: "/projects/lostilos.jpg",
     tags: ["Next.js", "Java", "PostgreSQL", "Spring Boot"],
     liveUrl: null,
     githubUrl: null,
