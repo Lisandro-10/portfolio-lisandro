@@ -66,17 +66,21 @@
   "Contact": {
     "title": "Contact",
     "subtitle": "Have a project in mind? Let's talk!",
+    "info": "Contact information",
+    "location": "Mendoza, Argentina",
     "form": {
+      "title": "Send me a message",
       "name": "Name",
       "namePlaceholder": "Your name",
       "email": "Email",
       "emailPlaceholder": "your@email.com",
       "service": "Service of interest",
+      "selectService": "Select a service",
       "servicePlaceholder": "Select a service",
-      "serviceLanding": "Landing Page", 
-      "serviceProfessional": "Professional Web", 
+      "serviceLanding": "Landing Page",
+      "serviceProfessional": "Professional Web",
       "serviceEcommerce": "E-commerce",
-      "serviceCustom": "Custom Solution", 
+      "serviceCustom": "Custom Solution",
       "message": "Message",
       "messagePlaceholder": "Tell me about your project...",
       "submit": "Send Message",
@@ -84,8 +88,7 @@
       "success": "Message sent successfully!",
       "required": "*"
     },
-    "findMe": "Find me at:",
-    "location": "Mendoza, Argentina"
+    "findMe": "Find me at:"
   },
   "Footer": {
     "rights": "© 2025 Lisandro Andia. All rights reserved."
@@ -176,5 +179,10 @@
   "LanguageSwitcher": {
     "es": "Español",
     "en": "English"
+  },
+  "Error": {
+    "title": "Something went wrong!",
+    "description": "An unexpected error occurred. Please try again.",
+    "tryAgain": "Try again"
   }
 }

@@ -1,12 +1,3 @@
-# Quitar todo del staging area
-git rm --cached -r .
-
-# Crear .gitignore
-touch .gitignore
-```
-
-Agrega esto a tu `.gitignore`:
-```
 # dependencies
 node_modules/
 /.pnp

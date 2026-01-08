@@ -66,12 +66,16 @@
   "Contact": {
     "title": "Contacto",
     "subtitle": "¿Tienes un proyecto en mente? ¡Hablemos!",
+    "info": "Información de contacto",
+    "location": "Mendoza, Argentina",
     "form": {
+      "title": "Envíame un mensaje",
       "name": "Nombre",
       "namePlaceholder": "Tu nombre",
       "email": "Email",
       "emailPlaceholder": "tu@email.com",
       "service": "Servicio de interés",
+      "selectService": "Selecciona un servicio",
       "servicePlaceholder": "Selecciona un servicio",
       "serviceLanding": "Landing Page",
       "serviceProfessional": "Web Profesional",
@@ -84,8 +88,7 @@
       "success": "¡Mensaje enviado correctamente!",
       "required": "*"
     },
-    "findMe": "Encuéntrame en:",
-    "location": "Mendoza, Argentina"
+    "findMe": "Encuéntrame en:"
   },
   "Footer": {
     "rights": "© 2025 Lisandro Andia. Todos los derechos reservados."
@@ -177,5 +180,10 @@
   "LanguageSwitcher": {
     "es": "Español",
     "en": "English"
+  },
+  "Error": {
+    "title": "¡Algo salió mal!",
+    "description": "Ocurrió un error inesperado. Por favor, intenta nuevamente.",
+    "tryAgain": "Intentar de nuevo"
   }
 }
