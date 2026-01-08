@@ -85,11 +85,11 @@ export default function ContactSection() {
                 <span>lisandroandia14@gmail.com</span>
               </a>
               <a
-                href="tel:+542645021485"
+                href="tel:+5492612567201"
                 className="flex items-center gap-3 text-sm sm:text-base text-gray-300 hover:text-primary transition-colors"
               >
                 <Phone size={20} className="flex-shrink-0" />
-                <span>+54 264 502 1485</span>
+                <span>+54 9 261 256 7201</span>
               </a>
               <div className="flex items-center gap-3 text-sm sm:text-base text-gray-300">
                 <MapPin size={20} className="flex-shrink-0" />
