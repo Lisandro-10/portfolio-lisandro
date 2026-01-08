@@ -32,17 +32,15 @@ export default function ContactSection() {
       : "Consulta desde el portfolio";
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
           name: (form.elements.namedItem("name") as HTMLInputElement).value,
-          subject: subject,
           email: (form.elements.namedItem("email") as HTMLInputElement).value,
+          subject: subject,
           message: (form.elements.namedItem("message") as HTMLTextAreaElement)
             .value,
         }),
@@ -137,8 +135,9 @@ export default function ContactSection() {
                   type="text"
                   id="name"
                   name="name"
+                  placeholder={t("Contact.form.namePlaceholder")}
                   required
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark border border-gray-700 rounded-lg focus:border-primary focus:outline-none text-sm sm:text-base"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark-darker border border-gray-700 rounded-lg focus:border-primary focus:outline-none text-sm sm:text-base"
                 />
               </div>
               <div>
@@ -152,8 +151,9 @@ export default function ContactSection() {
                   type="email"
                   id="email"
                   name="email"
+                  placeholder={t("Contact.form.emailPlaceholder")}
                   required
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark border border-gray-700 rounded-lg focus:border-primary focus:outline-none text-sm sm:text-base"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark-darker border border-gray-700 rounded-lg focus:border-primary focus:outline-none text-sm sm:text-base"
                 />
               </div>
               <div>
@@ -166,7 +166,7 @@ export default function ContactSection() {
                 <select
                   id="service"
                   name="service"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark border border-gray-700 rounded-lg focus:border-primary focus:outline-none text-sm sm:text-base"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark-darker border border-gray-700 rounded-lg focus:border-primary focus:outline-none text-sm sm:text-base"
                 >
                   <option value="">
                     {t("Contact.form.selectService")}
@@ -196,8 +196,9 @@ export default function ContactSection() {
                   id="message"
                   name="message"
                   rows={4}
+                  placeholder={t("Contact.form.messagePlaceholder")}
                   required
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark border border-gray-700 rounded-lg focus:border-primary focus:outline-none resize-none text-sm sm:text-base"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark-darker border border-gray-700 rounded-lg focus:border-primary focus:outline-none resize-none text-sm sm:text-base"
                 ></textarea>
               </div>
               {error && (
