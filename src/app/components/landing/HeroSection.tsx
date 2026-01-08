@@ -26,10 +26,10 @@ export default function HeroSection() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <a
-                href="#proyectos"
+                href="/servicios"
                 className="btn-primary w-full sm:w-auto text-center"
               >
-                {t("viewProjects")}
+                {t("viewServices")}
               </a>
               <a
                 href="#contacto"
