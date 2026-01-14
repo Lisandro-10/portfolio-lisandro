@@ -115,11 +115,11 @@ export default function Servicios() {
                 <span>{t("sendEmail")}</span>
               </a>
               <a
-                href="tel:+542612657201"
+                href="tel:+5492612657201"
                 className="btn-secondary w-full sm:w-auto flex items-center justify-center gap-2"
               >
                 <Phone size={18} />
-                <span>+54 261 2657201</span>
+                <span>+54 9 261 2657201</span>
               </a>
             </div>
 
