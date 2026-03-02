@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, MapPin, Phone, Github, Linkedin } from "lucide-react";
+import { FiMail, FiMapPin, FiGithub, FiUser, FiAtSign, FiBriefcase, FiMessageSquare, FiArrowRight } from "react-icons/fi";
+import { FaWhatsapp, FaLinkedinIn } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 
 export default function ContactSection() {
-  const t = useTranslations();
+  const t = useTranslations("Contact");
+  const tServices = useTranslations("Services");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -17,44 +19,25 @@ export default function ContactSection() {
 
     const form = e.currentTarget;
 
-    const serviceValue = (
-      form.elements.namedItem("service") as HTMLSelectElement
-    ).value;
-    const serviceLabels: Record<string, string> = {
-      landing: t("Services.plans.landing.title"),
-      professional: t("Services.plans.professional.title"),
-      ecommerce: t("Services.plans.ecommerce.title"),
-      customSolution: t("Services.plans.customSolution.title"),
-    };
-
-    const subject = serviceValue
-      ? `Consulta: ${serviceLabels[serviceValue]}`
-      : "Consulta desde el portfolio";
-
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
           name: (form.elements.namedItem("name") as HTMLInputElement).value,
           email: (form.elements.namedItem("email") as HTMLInputElement).value,
-          subject: subject,
-          message: (form.elements.namedItem("message") as HTMLTextAreaElement)
-            .value,
+          subject: `Consulta desde el portfolio`,
+          message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
         }),
       });
 
       const result = await response.json();
-
       if (result.success) {
         setIsSuccess(true);
         form.reset();
       } else {
-        setError(result.message || "Something went wrong. Please try again.");
+        setError(result.message || "Something went wrong.");
       }
     } catch {
       setError("An error occurred while submitting the form.");
@@ -64,161 +47,133 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contacto" className="section-container bg-dark-lighter/50 mb-10">
+    <section id="contacto" className="section-container">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 text-center">
-          {t("Contact.title")}
-        </h2>
-        <p className="text-sm sm:text-base text-gray-300 text-center mb-8 sm:mb-12">
-          {t("Contact.subtitle")}
-        </p>
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary dark:text-white mb-2">
+            {t("title")}
+          </h2>
+          <p className="text-sm sm:text-base text-text-secondary dark:text-gray-400">
+            {t("subtitle")}
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          <div className="bg-dark-lighter p-4 sm:p-6 md:p-8 rounded-lg border border-dark-lighter">
-            <h3 className="text-xl sm:text-2xl font-bold mb-6">
-              {t("Contact.info")}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Quick Connect Card */}
+          <div className="card p-6">
+            <h3 className="text-xs font-semibold tracking-wider uppercase text-text-tertiary mb-5">
+              {t("quickConnect")}
             </h3>
-            <div className="space-y-3 sm:space-y-4">
-              <a
-                href="mailto:lisandroandia14@gmail.com"
-                className="flex items-center gap-3 text-sm sm:text-base text-gray-300 hover:text-primary transition-colors"
-              >
-                <Mail size={20} className="flex-shrink-0" />
-                <span>lisandroandia14@gmail.com</span>
+
+            {/* Quick links */}
+            <div className="flex justify-center gap-6 mb-6">
+              <a href="mailto:lisandroandia14@gmail.com" className="flex flex-col items-center gap-2 group">
+                <div className="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <FiMail size={20} className="text-primary" />
+                </div>
+                <span className="text-xs text-text-tertiary">{t("email")}</span>
               </a>
-              <a
-                href="tel:+5492612567201"
-                className="flex items-center gap-3 text-sm sm:text-base text-gray-300 hover:text-primary transition-colors"
-              >
-                <Phone size={20} className="flex-shrink-0" />
-                <span>+54 9 261 256 7201</span>
+              <a href="https://wa.me/5492612657201" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-2 group">
+                <div className="w-12 h-12 bg-green-50 dark:bg-green-900/20 rounded-full flex items-center justify-center group-hover:bg-green-100 transition-colors">
+                  <FaWhatsapp size={20} className="text-green-500" />
+                </div>
+                <span className="text-xs text-text-tertiary">{t("whatsapp")}</span>
               </a>
-              <div className="flex items-center gap-3 text-sm sm:text-base text-gray-300">
-                <MapPin size={20} className="flex-shrink-0" />
-                <span>{t("Contact.location")}</span>
-              </div>
+              <a href="https://www.linkedin.com/in/lisandro-andia-3b46aa23a" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-2 group">
+                <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/20 rounded-full flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+                  <FaLinkedinIn size={20} className="text-blue-600" />
+                </div>
+                <span className="text-xs text-text-tertiary">{t("linkedin")}</span>
+              </a>
             </div>
 
-            <div className="flex gap-3 sm:gap-4 mt-6 sm:mt-8">
-              <a
-                href="https://github.com/lisandro-10"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 sm:p-3 bg-dark hover:bg-primary transition-colors rounded-full"
-                aria-label="GitHub"
-              >
-                <Github size={20} className="sm:w-6 sm:h-6" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/lisandro-andia-3b46aa23a"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 sm:p-3 bg-dark hover:bg-primary transition-colors rounded-full"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={20} className="sm:w-6 sm:h-6" />
+            {/* Info */}
+            <div className="border-t border-border-light dark:border-dark-lighter pt-5 space-y-3">
+              <div className="flex items-center gap-3 text-sm text-text-secondary dark:text-gray-400">
+                <FiMapPin size={16} className="text-text-tertiary flex-shrink-0" />
+                <span>{t("location")}</span>
+              </div>
+              <a href="https://github.com/lisandro-10" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-text-secondary dark:text-gray-400 hover:text-primary transition-colors">
+                <FiGithub size={16} className="text-text-tertiary flex-shrink-0" />
+                <span>github.com/lisandro-10</span>
               </a>
             </div>
           </div>
 
-          <div className="bg-dark-lighter p-4 sm:p-6 md:p-8 rounded-lg border border-dark-lighter">
-            <h3 className="text-xl sm:text-2xl font-bold mb-6">
-              {t("Contact.form.title")}
+          {/* Contact Form Card */}
+          <div className="card p-6">
+            <h3 className="text-xs font-semibold tracking-wider uppercase text-text-tertiary mb-5">
+              {t("form.title")}
             </h3>
+
             <form onSubmit={onSubmit} className="space-y-4">
               <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm sm:text-base mb-2"
-                >
-                  {t("Contact.form.name")}
+                <label htmlFor="name" className="block text-sm mb-1.5 text-text-secondary dark:text-gray-300">
+                  {t("form.name")}
                 </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder={t("Contact.form.namePlaceholder")}
-                  required
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark-darker border border-gray-700 rounded-lg focus:border-primary focus:outline-none text-sm sm:text-base"
-                />
+                <div className="relative">
+                  <FiUser size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-tertiary" />
+                  <input
+                    type="text" id="name" name="name" required
+                    placeholder={t("form.namePlaceholder")}
+                    className="w-full pl-10 pr-4 py-3 bg-surface-secondary dark:bg-dark border border-border-light dark:border-dark-lighter rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/10 focus:outline-none text-sm transition-all"
+                  />
+                </div>
               </div>
+
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm sm:text-base mb-2"
-                >
-                  {t("Contact.form.email")}
+                <label htmlFor="email" className="block text-sm mb-1.5 text-text-secondary dark:text-gray-300">
+                  {t("form.email")}
                 </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder={t("Contact.form.emailPlaceholder")}
-                  required
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark-darker border border-gray-700 rounded-lg focus:border-primary focus:outline-none text-sm sm:text-base"
-                />
+                <div className="relative">
+                  <FiAtSign size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-tertiary" />
+                  <input
+                    type="email" id="email" name="email" required
+                    placeholder={t("form.emailPlaceholder")}
+                    className="w-full pl-10 pr-4 py-3 bg-surface-secondary dark:bg-dark border border-border-light dark:border-dark-lighter rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/10 focus:outline-none text-sm transition-all"
+                  />
+                </div>
               </div>
+
               <div>
-                <label
-                  htmlFor="service"
-                  className="block text-sm sm:text-base mb-2"
-                >
-                  {t("Contact.form.service")}
+                <label htmlFor="service" className="block text-sm mb-1.5 text-text-secondary dark:text-gray-300">
+                  {t("form.service")}
                 </label>
-                <select
-                  id="service"
-                  name="service"
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark-darker border border-gray-700 rounded-lg focus:border-primary focus:outline-none text-sm sm:text-base"
-                >
-                  <option value="">
-                    {t("Contact.form.selectService")}
-                  </option>
-                  <option value="landing">
-                    {t("Services.plans.landing.title")}
-                  </option>
-                  <option value="professional">
-                    {t("Services.plans.professional.title")}
-                  </option>
-                  <option value="ecommerce">
-                    {t("Services.plans.ecommerce.title")}
-                  </option>
-                  <option value="customSolution">
-                    {t("Services.plans.customSolution.title")}
-                  </option>
-                </select>
+                <div className="relative">
+                  <FiBriefcase size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-tertiary" />
+                  <select
+                    id="service" name="service"
+                    className="w-full pl-10 pr-4 py-3 bg-surface-secondary dark:bg-dark border border-border-light dark:border-dark-lighter rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/10 focus:outline-none text-sm appearance-none transition-all"
+                  >
+                    <option value="">{t("form.selectService")}</option>
+                    <option value="landing">{tServices("plans.landing.title")}</option>
+                    <option value="professional">{tServices("plans.professional.title")}</option>
+                    <option value="ecommerce">{tServices("plans.ecommerce.title")}</option>
+                    <option value="custom">{tServices("plans.customSolution.title")}</option>
+                  </select>
+                </div>
               </div>
+
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm sm:text-base mb-2"
-                >
-                  {t("Contact.form.message")}
+                <label htmlFor="message" className="block text-sm mb-1.5 text-text-secondary dark:text-gray-300">
+                  {t("form.message")}
                 </label>
                 <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  placeholder={t("Contact.form.messagePlaceholder")}
-                  required
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark-darker border border-gray-700 rounded-lg focus:border-primary focus:outline-none resize-none text-sm sm:text-base"
-                ></textarea>
+                  id="message" name="message" rows={4} required
+                  placeholder={t("form.messagePlaceholder")}
+                  className="w-full px-4 py-3 bg-surface-secondary dark:bg-dark border border-border-light dark:border-dark-lighter rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/10 focus:outline-none text-sm resize-none transition-all"
+                />
               </div>
-              {error && (
-                <p className="text-red-500 text-xs sm:text-sm">{error}</p>
-              )}
-              {isSuccess && (
-                <p className="text-green-500 text-xs sm:text-sm">
-                  {t("Contact.form.success")}
-                </p>
-              )}
+
+              {error && <p className="text-red-500 text-xs">{error}</p>}
+              {isSuccess && <p className="text-green-500 text-xs">{t("form.success")}</p>}
+
               <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+                type="submit" disabled={isSubmitting}
+                className="w-full btn-primary flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubmitting
-                  ? t("Contact.form.sending")
-                  : t("Contact.form.submit")}
+                <span>{isSubmitting ? t("form.sending") : t("form.submit")}</span>
+                {!isSubmitting && <FiArrowRight size={16} />}
               </button>
             </form>
           </div>

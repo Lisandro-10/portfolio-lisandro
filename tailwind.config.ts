@@ -6,64 +6,47 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: ["class", 'html[class~="dark"]'],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
-        // Paleta original del usuario (sin cambios)
         primary: {
           DEFAULT: "#3B82F6",
           light: "#60A5FA",
           dark: "#2563EB",
         },
-        secondary: {
+        accent: {
           DEFAULT: "#F97316",
-          light: "#FDBA74",
+          light: "#FB923C",
           dark: "#EA580C",
         },
-        dark: {
-          DEFAULT: "#000",
-          lighter: "#334155",
-          darker: "#0F172A",
-        },
-        
-        // Colores adicionales para light theme (usando slate de Tailwind)
-        light: {
+        surface: {
           DEFAULT: "#ffffff",
-          secondary: "#f1f5f9",  // slate-100
-          tertiary: "#f8fafc",   // slate-50
+          secondary: "#f8fafc",
+          tertiary: "#f3f4f6",
         },
-        
-        // Text colors organizados por theme
         text: {
-          dark: {
-            primary: "#ffffff",
-            secondary: "#d1d5db",   // gray-300
-            tertiary: "#9ca3af",    // gray-400
-          },
-          light: {
-            primary: "#0F172A",     // slate-900 (mismo que dark.darker)
-            secondary: "#334155",   // slate-700 (mismo que dark.lighter)
-            tertiary: "#64748b",    // slate-500
-          },
+          primary: "#111827",
+          secondary: "#4b5563",
+          tertiary: "#6b7280",
+          inverted: "#ffffff",
         },
-        
-        // Border colors
         border: {
-          dark: "#334155",    // dark.lighter
-          light: "#e2e8f0",   // slate-200
+          DEFAULT: "#e5e7eb",
+          light: "#f3f4f6",
         },
-        
-        // Filter-specific colors (para la solución del hover)
-        filter: {
-          hover: {
-            dark: "#334155",    // dark.lighter
-            light: "#f1f5f9",   // slate-100
-          },
-          selected: {
-            dark: "#1e3a8a",    // blue-900 (consistente con primary)
-            light: "#dbeafe",   // blue-100 (consistente con primary)
-          },
+        dark: {
+          DEFAULT: "#0F172A",
+          lighter: "#1E293B",
+          card: "#1E293B",
+        },
+        tag: {
+          blue: { bg: "#eff6ff", text: "#2563eb" },
+          purple: { bg: "#faf5ff", text: "#9333ea" },
+          teal: { bg: "#ecfeff", text: "#0891b2" },
+          orange: { bg: "#fff7ed", text: "#ea580c" },
+          green: { bg: "#f0fdf4", text: "#16a34a" },
+          rose: { bg: "#fff1f2", text: "#e11d48" },
         },
       },
     },
