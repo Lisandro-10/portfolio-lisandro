@@ -1,8 +1,9 @@
 "use client";
 
-import { Home, ArrowLeft } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { BiHome } from "react-icons/bi";
+import { BiArrowBack } from "react-icons/bi";
 
 export default function NotFound() {
   const t = useTranslations("NotFound");
@@ -27,7 +28,7 @@ export default function NotFound() {
             href="/"
             className="btn-primary w-full sm:w-auto flex items-center justify-center gap-2"
           >
-            <Home size={18} />
+            <BiHome size={18} />
             <span>{t("backHome")}</span>
           </Link>
 
@@ -35,7 +36,7 @@ export default function NotFound() {
             onClick={() => window.history.back()}
             className="btn-secondary w-full sm:w-auto flex items-center justify-center gap-2"
           >
-            <ArrowLeft size={18} />
+            <BiArrowBack size={18} />
             <span>{t("previousPage")}</span>
           </button>
         </div>

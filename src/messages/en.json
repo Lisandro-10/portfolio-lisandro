@@ -6,119 +6,90 @@
   "Navbar": {
     "projects": "Projects",
     "services": "Services",
-    "about": "About Me",
-    "contact": "Contact",
-    "products": "Products"
+    "about": "About",
+    "contact": "Contact"
   },
   "Hero": {
     "name": "Lisandro Andia",
-    "role": "Systems Engineer | Full Stack Developer",
-    "description": "Specialized in creating modern and scalable web experiences. With experience in the complete software development lifecycle.",
+    "role": "Software Engineer | Full Stack Developer",
+    "description": "Specialized in creating scalable and modern web experiences. Passionate about the full software development lifecycle.",
     "viewServices": "View Services",
-    "contactMe": "Contact"
+    "contactMe": "Contact Me"
+  },
+  "TechStack": {
+    "title": "Tech Stack",
+    "items": {
+      "react": "React",
+      "nextjs": "Next.js",
+      "typescript": "TypeScript",
+      "tailwind": "Tailwind",
+      "aws": "AWS",
+      "postgresql": "PostgreSQL",
+      "mysql": "MySQL",
+      "java": "Java",
+      "springboot": "Spring Boot"
+    }
   },
   "Projects": {
-    "title": "My Projects",
-    "subtitle": "A selection of projects demonstrating my experience with different technologies and solutions.",
+    "title": "Featured Projects",
+    "subtitle": "Selection of recent works",
+    "viewAll": "View All",
     "viewProject": "View Project",
-    "demo": "Source Code",
+    "liveDemo": "Live Demo",
+    "sourceCode": "Source",
+    "privateRepo": "Private Repo",
     "items": {
       "ecommerce": {
         "title": "E-commerce Solution",
-        "description": "A web application which offers a complete solution for e-commerce with MercadoPago integration and Tiendanube."
+        "description": "A complete e-commerce web application featuring MercadoPago integration and Tiendanube platform."
       },
       "lostilos": {
         "title": "Club Management System",
-        "description": "A web application to manage partners with authentication, categorization, and tracking."
+        "description": "Platform to manage partners with authentication, categorization, and activity tracking."
       },
       "hexagon": {
-        "title": "Hexagon Solutions Web Development",
-        "description": "Website development for Hexagon Solutions with modern design and SEO optimized."
+        "title": "Hexagon Solutions Web",
+        "description": "Corporate website development focused on modern design principles and high performance."
       },
       "estudioandia": {
-        "title": "Estudio Andia Web Development",
-        "description": "Simple static website built with HTML, CSS, and JavaScript."
+        "title": "Estudio Andia Web",
+        "description": "Elegant static website portfolio for an architecture firm, built for speed and visual impact."
       },
       "ando-presskit": {
         "title": "Ando Press Kit",
-        "description": "Web development for ANDO, a Progressive House DJ group from Mendoza, Argentina."
+        "description": "Interactive electronic press kit for a Progressive House DJ group from Mendoza, Argentina."
       }
     }
   },
   "About": {
-    "title": "About Me",
-    "trajectory": "My Professional Journey",
+    "title": "Experience",
     "experiences": {
       "ntt": {
         "role": "Liferay Developer",
         "company": "NTT DATA",
-        "period": "September 2025 - present",
-        "description": "Development of portals and applications with Liferay DXP. Theme and hook customization. Integration with external services."
+        "period": "Sep 2025 - Present",
+        "description": "Development of portals and applications using Liferay DXP. Customizing themes and integrating external services."
       },
       "certant": {
-        "role": "Junior Full Stack Developer",
+        "role": "Full Stack Developer Junior",
         "company": "Certant SA",
-        "period": "June 2024 - September 2025",
-        "description": "Client-server website development. CMS maintenance and updates. REST API with classic resources."
+        "period": "Jun 2024 - Sep 2025",
+        "description": "Client-server web development, CMS maintenance, and REST API development with Java and Spring Boot."
       }
     }
   },
-  "Contact": {
-    "title": "Contact",
-    "subtitle": "Have a project in mind? Let's talk!",
-    "info": "Contact information",
-    "location": "Mendoza, Argentina",
-    "form": {
-      "title": "Send me a message",
-      "name": "Name",
-      "namePlaceholder": "Your name",
-      "email": "Email",
-      "emailPlaceholder": "your@email.com",
-      "service": "Service of interest",
-      "selectService": "Select a service",
-      "servicePlaceholder": "Select a service",
-      "serviceLanding": "Landing Page",
-      "serviceProfessional": "Professional Web",
-      "serviceEcommerce": "E-commerce",
-      "serviceCustom": "Custom Solution",
-      "message": "Message",
-      "messagePlaceholder": "Tell me about your project...",
-      "submit": "Send Message",
-      "sending": "Sending...",
-      "success": "Message sent successfully!",
-      "required": "*"
-    },
-    "findMe": "Find me at:"
-  },
-  "Footer": {
-    "rights": "© 2025 Lisandro Andia. All rights reserved."
-  },
-  "NotFound": {
-    "title": "Page Not Found",
-    "description": "Sorry, the page you are looking for does not exist or has been moved.",
-    "backHome": "Back to Home",
-    "previousPage": "Previous Page",
-    "explore": "Or you can explore:",
-    "myProjects": "My Projects",
-    "aboutMe": "About Me",
-    "contact": "Contact"
-  },
   "Services": {
-    "heroTitle": "Web Development Plans",
-    "heroSubtitle": "Solutions tailored to your needs. From a landing page to a complete online store.",
-    "delivery": "Delivery:",
-    "requestQuote": "Request Quote",
-    "faqTitle": "Frequently Asked Questions",
-    "ctaTitle": "Ready to start?",
-    "ctaSubtitle": "Contact me to discuss your project and get a personalized quote.",
-    "sendEmail": "Send Email",
-    "useContactForm": "Or use the contact form →",
+    "title": "Web Development Plans",
+    "subtitle": "Solutions tailored to your needs. From a landing page to a complete online store.",
+    "getStarted": "Get Started",
+    "contactForQuote": "Contact for Quote",
     "plans": {
       "landing": {
         "title": "Essential Landing",
-        "description": "Quick and effective web presence",
+        "label": "STARTER",
+        "description": "Quick and effective web presence for personal brands.",
         "features": [
-          "Build with platforms like wordpress",
+          "Build with platforms like WordPress",
           "Landing page with 1-3 sections",
           "Design based on modern templates",
           "100% responsive (mobile and desktop)",
@@ -128,37 +99,33 @@
       },
       "professional": {
         "title": "Professional Web",
-        "description": "Complete and scalable solution",
+        "label": "MOST POPULAR",
+        "description": "Complete and scalable solution for growing businesses.",
         "features": [
           "Complete SPA developed with Next.js",
           "Unique design adapted to your brand",
-          "SEO optimized (meta tags, sitemap, performance)",
+          "SEO optimized (meta tags, sitemap)",
           "Smooth animations and transitions",
           "Advanced forms (contact, newsletter)",
-          "2 revision rounds",
-          "1 month of basic support included"
+          "2 revision rounds"
         ]
       },
       "ecommerce": {
         "title": "E-commerce Solution",
-        "description": "Sell online from day one",
+        "label": "BUSINESS",
+        "description": "Sell online from day one with a fully integrated shop.",
         "features": [
           "Everything in the Professional Plan",
-          "Complete integration with Tiendanube",
+          "Integration with Tiendanube / Stripe",
           "Custom product catalog",
-          "Functional shopping cart",
-          "Integrated checkout",
-          "Admin panel",
-          "3 revision rounds",
-          "3 months of maintenance included"
+          "Functional shopping cart & Checkout",
+          "Admin panel for management",
+          "3 months maintenance included"
         ]
       },
       "customSolution": {
         "title": "Custom Solution",
-        "description": "Solution tailored to your needs",
-        "features": [
-          "Let's discuss your needs and create a solution that meets your requirements"
-        ]
+        "description": "Need something specific? Let's discuss your needs and create a solution that meets your exact requirements."
       }
     },
     "faq": {
@@ -175,6 +142,44 @@
         "answer": "Yes, the development of new functionalities is quoted separately according to the complexity of the requirement."
       }
     }
+  },
+  "Contact": {
+    "title": "Contact",
+    "subtitle": "Have a project in mind? Let's talk!",
+    "quickConnect": "Quick Connect",
+    "email": "Email",
+    "whatsapp": "WhatsApp",
+    "linkedin": "LinkedIn",
+    "location": "Mendoza, Argentina",
+    "sendMessage": "Send me a message",
+    "form": {
+      "title": "Send me a message",
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "service": "Service of interest",
+      "selectService": "Select a service",
+      "message": "Message",
+      "messagePlaceholder": "Tell me about your project...",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully!"
+    }
+  },
+  "Footer": {
+    "rights": "© 2025 Lisandro Andia. All rights reserved.",
+    "builtWith": "Built with Next.js & Tailwind CSS"
+  },
+  "NotFound": {
+    "title": "Page Not Found",
+    "description": "Sorry, the page you are looking for does not exist or has been moved.",
+    "backHome": "Back to Home",
+    "previousPage": "Previous Page",
+    "explore": "Or you can explore:",
+    "myProjects": "My Projects",
+    "aboutMe": "About Me",
+    "contact": "Contact"
   },
   "LanguageSwitcher": {
     "es": "Español",

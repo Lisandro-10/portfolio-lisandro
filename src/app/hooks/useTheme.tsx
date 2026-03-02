@@ -6,14 +6,13 @@ const THEME_STORAGE_KEY = "theme";
 const THEME_EVENT_NAME = "theme-change";
 
 export function useTheme() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<"dark" | "light">("light");
 
   useEffect(() => {
-    // Cargar tema guardado
     const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) as "dark" | "light";
     if (savedTheme) {
       setTheme(savedTheme);
-      document.documentElement.classList.toggle("light", savedTheme === "light");
+      document.documentElement.classList.toggle("dark", savedTheme === "dark");
     }
   }, []);
 
@@ -23,7 +22,7 @@ export function useTheme() {
       const nextTheme = customEvent.detail;
       if (!nextTheme) return;
       setTheme(nextTheme);
-      document.documentElement.classList.toggle("light", nextTheme === "light");
+      document.documentElement.classList.toggle("dark", nextTheme === "dark");
     };
 
     window.addEventListener(THEME_EVENT_NAME, handler);
@@ -31,11 +30,10 @@ export function useTheme() {
   }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
+    const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     localStorage.setItem(THEME_STORAGE_KEY, newTheme);
-    document.documentElement.classList.toggle("light", newTheme === "light");
-
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
     window.dispatchEvent(new CustomEvent(THEME_EVENT_NAME, { detail: newTheme }));
   };
 
