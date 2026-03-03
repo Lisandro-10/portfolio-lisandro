@@ -23,11 +23,10 @@ interface ProjectCardProps {
   tags: ProjectTag[];
   liveUrl?: string | null;
   githubUrl?: string | null;
-  status?: string | null;
 }
 
 export default function ProjectCard({
-  title, description, image, tags, liveUrl, githubUrl, status,
+  title, description, image, tags, liveUrl, githubUrl
 }: ProjectCardProps) {
   const t = useTranslations("Projects");
 
@@ -41,13 +40,6 @@ export default function ProjectCard({
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
         />
-        {status === "active" && (
-          <div className="absolute top-3 left-3">
-            <span className="px-2.5 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
-              Active
-            </span>
-          </div>
-        )}
       </div>
 
       {/* Content */}

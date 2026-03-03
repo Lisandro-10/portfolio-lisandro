@@ -29,7 +29,6 @@ export default function ProjectsSection() {
               tags={project.tags}
               liveUrl={project.liveUrl}
               githubUrl={project.githubUrl}
-              status={project.status}
             />
           ))}
         </div>
