@@ -37,10 +37,10 @@ export default function ContactSection() {
         setIsSuccess(true);
         form.reset();
       } else {
-        setError(result.message || "Something went wrong.");
+        setError(t("form.error"));
       }
     } catch {
-      setError("An error occurred while submitting the form.");
+      setError(t("form.error"));
     } finally {
       setIsSubmitting(false);
     }

@@ -168,11 +168,12 @@
       "messagePlaceholder": "Tell me about your project...",
       "submit": "Send Message",
       "sending": "Sending...",
-      "success": "Message sent successfully!"
+      "success": "Message sent successfully!",
+      "error": "Something went wrong."
     }
   },
   "Footer": {
-    "rights": "© 2025 Lisandro Andia. All rights reserved.",
+    "rights": "© 2026 Lisandro Andia. All rights reserved.",
     "builtWith": "Built with Next.js & Tailwind CSS"
   },
   "NotFound": {
