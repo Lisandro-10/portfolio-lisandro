@@ -9,7 +9,6 @@ export const projects = [
     ],
     liveUrl: "https://main.d3btlvczyugl3y.amplifyapp.com",
     githubUrl: "https://github.com/Lisandro-10/portal-lassenware",
-    status: "active",
   },
   {
     key: "lostilos",
@@ -22,7 +21,6 @@ export const projects = [
     ],
     liveUrl: null,
     githubUrl: null,
-    status: null,
   },
   {
     key: "hexagon",
@@ -34,7 +32,6 @@ export const projects = [
     ],
     liveUrl: "https://hexagonsolutionsusa.com",
     githubUrl: null,
-    status: null,
   },
   {
     key: "estudioandia",
@@ -47,7 +44,6 @@ export const projects = [
     ],
     liveUrl: "https://estudioandia.com",
     githubUrl: null,
-    status: null,
   },
   {
     key: "ando-presskit",
@@ -55,10 +51,20 @@ export const projects = [
     tags: [
       { label: "Next.js", color: "blue" },
       { label: "TypeScript", color: "purple" },
-      { label: "Node.js", color: "green" },
+      { label: "Tailwind", color: "teal" },
     ],
     liveUrl: "https://ando-ku.com",
     githubUrl: "https://github.com/Lisandro-10/ando-presskit",
-    status: null,
+  },
+    {
+    key: "master-event",
+    image: "/projects/master-event.png",
+    tags: [
+      { label: "Next.js", color: "blue" },
+      { label: "TypeScript", color: "purple" },
+      { label: "Tailwind", color: "teal" },
+    ],
+    liveUrl: "https://masterevent.com.ar",
+    githubUrl: "https://github.com/Lisandro-10/master-event",
   },
 ];

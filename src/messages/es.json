@@ -58,6 +58,10 @@
       "ando-presskit": {
         "title": "Ando Press Kit",
         "description": "Press kit electrónico interactivo para un grupo de DJ de Progressive House de Mendoza, Argentina."
+      },
+      "master-event": {
+        "title": "Master Event Web",
+        "description": "Sitio web de empresa de alquiler de equipos de sonido ubicada en Mendoza, Argentina."
       }
     }
   },

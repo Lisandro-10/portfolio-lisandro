@@ -11,7 +11,7 @@
   },
   "Hero": {
     "name": "Lisandro Andia",
-    "role": "Software Engineer | Full Stack Developer",
+    "role": "Systems Engineer | Full Stack Developer",
     "description": "Specialized in creating scalable and modern web experiences. Passionate about the full software development lifecycle.",
     "viewServices": "View Services",
     "contactMe": "Contact Me"
@@ -58,6 +58,10 @@
       "ando-presskit": {
         "title": "Ando Press Kit",
         "description": "Interactive electronic press kit for a Progressive House DJ group from Mendoza, Argentina."
+      },
+      "master-event": {
+        "title": "Master Event Web",
+        "description": "Elegant static website for a sound equipment rental from Mendoza, Argentina, built for speed and visual impact."
       }
     }
   },
