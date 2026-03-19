@@ -12,6 +12,12 @@ export default function ContactSection() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const ALLOWED_SERVICES = ["", "landing", "professional", "ecommerce", "custom"];
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const sanitizeText = (value: string, maxLength: number) =>
+    value.replace(/[\r\n]/g, " ").trim().slice(0, maxLength);
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -19,16 +25,39 @@ export default function ContactSection() {
 
     const form = e.currentTarget;
 
+    const name = sanitizeText((form.elements.namedItem("name") as HTMLInputElement).value, 100);
+    const email = sanitizeText((form.elements.namedItem("email") as HTMLInputElement).value, 254);
+    const service = (form.elements.namedItem("service") as HTMLSelectElement).value;
+    const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value.trim().slice(0, 2000);
+
+    if (!name || !email || !message) {
+      setError(t("form.error"));
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (!EMAIL_REGEX.test(email)) {
+      setError(t("form.error"));
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (!ALLOWED_SERVICES.includes(service)) {
+      setError(t("form.error"));
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
-          name: (form.elements.namedItem("name") as HTMLInputElement).value,
-          email: (form.elements.namedItem("email") as HTMLInputElement).value,
+          name,
+          email,
           subject: `Consulta desde el portfolio`,
-          message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+          message,
         }),
       });
 
