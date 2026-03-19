@@ -43,7 +43,7 @@ export const projects = [
       { label: "JavaScript", color: "green" },
     ],
     liveUrl: "https://estudioandia.com",
-    githubUrl: null,
+    githubUrl: "https://github.com/Lisandro-10/andia-andia-web",
   },
   {
     key: "ando-presskit",
